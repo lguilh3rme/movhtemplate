@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>MOVH — Treinamento Personalizado / Personal Training</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--P:#7C74DC;--Pd:#3A3290;--Pl:#EEEDFE;--G:#1A9E72;--bg:#F2F1EE;--card:#FFF;--tx:#1A1A18;--t2:#666;--t3:#999;--bd:#DDDBD4;--cl:#F0EEE8;--r:14px;--rs:8px;--font-d:'Plus Jakarta Sans',-apple-system,sans-serif;--font-b:'Inter',-apple-system,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-b);background:var(--bg);color:var(--tx);min-height:100vh}
+nav{background:var(--card);border-bottom:1px solid var(--bd);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px}
+.nav-brand{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--tx);letter-spacing:-.02em}
+.nav-right{display:flex;align-items:center;gap:10px}
+.lang-btn{background:var(--cl);border:1px solid var(--bd);border-radius:var(--rs);padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--t2);transition:all .15s}
+.lang-btn:hover{border-color:var(--P);color:var(--P)}
+.nav-cta{background:var(--P);color:#fff;border:none;border-radius:var(--rs);padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
+.hero{text-align:center;padding:72px 24px 48px;max-width:680px;margin:0 auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--Pl);color:var(--Pd);border:1px solid #D6D3F8;border-radius:99px;padding:5px 14px;font-size:12px;font-weight:600;margin-bottom:20px}
+.hero h1{font-family:var(--font-d);font-size:clamp(26px,5vw,46px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:16px}
+.hero h1 span{color:var(--P)}
+.hero p{font-size:16px;color:var(--t2);line-height:1.6;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto}
+.hero-cta{background:var(--P);color:#fff;border:none;border-radius:var(--r);padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(124,116,220,.35);transition:all .15s}
+.hero-cta:hover{background:var(--Pd);transform:translateY(-1px)}
+.stats{display:flex;justify-content:center;gap:40px;padding:0 24px 56px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-n{font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--P)}
+.stat-l{font-size:12px;color:var(--t2);margin-top:2px}
+.section{max-width:960px;margin:0 auto;padding:0 24px 72px}
+.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--P);margin-bottom:10px}
+.section-title{font-family:var(--font-d);font-size:clamp(20px,3vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.section-sub{font-size:14px;color:var(--t2);margin-bottom:36px;line-height:1.6}
+.proto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.proto-card{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:24px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
+.proto-card:hover{border-color:var(--P);box-shadow:0 8px 24px rgba(124,116,220,.15);transform:translateY(-2px)}
+.proto-card.selected{border-color:var(--P);background:var(--Pl)}
+.proto-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;background:var(--P);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+.proto-icon{font-size:32px;margin-bottom:12px}
+.proto-name{font-family:var(--font-d);font-size:16px;font-weight:700;margin-bottom:6px}
+.proto-desc{font-size:12px;color:var(--t2);line-height:1.5}
+.proto-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
+.proto-tag{background:var(--cl);border:1px solid var(--bd);border-radius:99px;padding:3px 9px;font-size:10px;color:var(--t2);font-weight:500}
+.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:780px;margin:0 auto}
+@media(max-width:600px){.planos-grid{grid-template-columns:1fr}.plano-card.popular{transform:none}}
+.plano-card{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:28px 24px;text-align:center;transition:all .2s;position:relative}
+.plano-card:hover{border-color:var(--P);box-shadow:0 8px 24px rgba(124,116,220,.15)}
+.plano-card.popular{border-color:var(--P);transform:scale(1.04)}
+.plano-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--P);color:#fff;border-radius:99px;padding:4px 14px;font-size:11px;font-weight:700;white-space:nowrap}
+.plano-nome{font-family:var(--font-d);font-size:15px;font-weight:700;margin-bottom:4px}
+.plano-dias{font-size:11px;color:var(--t3);margin-bottom:16px}
+.plano-preco{font-family:var(--font-d);font-size:32px;font-weight:800;margin-bottom:4px}
+.plano-preco sup{font-size:16px;font-weight:600;vertical-align:super}
+.plano-economia{font-size:11px;color:var(--G);font-weight:600;margin-bottom:20px;min-height:16px}
+.plano-btn{width:100%;padding:12px;border:none;border-radius:var(--rs);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.plano-card.popular .plano-btn{background:var(--P);color:#fff;box-shadow:0 4px 12px rgba(124,116,220,.35)}
+.plano-card:not(.popular) .plano-btn{background:var(--card);color:var(--P);border:2px solid var(--P)}
+.plano-card:not(.popular) .plano-btn:hover{background:var(--Pl)}
+.gw-selector{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.gw-btn{display:flex;align-items:center;gap:8px;padding:8px 16px;border:2px solid var(--bd);border-radius:var(--rs);background:var(--card);cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;color:var(--t2);transition:all .15s}
+.gw-btn.active{border-color:var(--P);color:var(--P);background:var(--Pl)}
+.steps{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
+.step{display:flex;gap:14px;align-items:flex-start;max-width:240px}
+.step-n{width:32px;height:32px;border-radius:50%;background:var(--Pl);color:var(--P);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-t{font-weight:600;font-size:13px;margin-bottom:3px}
+.step-d{font-size:12px;color:var(--t2);line-height:1.5}
+.screen{display:none}.screen.active{display:block}
+.back-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--t2);font-size:13px;cursor:pointer;font-family:inherit;padding:0;margin-bottom:28px}
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.loading-overlay.show{display:flex}
+.spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-msg{color:#fff;font-size:14px;font-weight:600}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1A1A18;color:#fff;border-radius:var(--r);padding:12px 20px;font-size:13px;font-weight:500;z-index:300;transition:transform .3s;white-space:nowrap;max-width:90vw}
+.toast.show{transform:translateX(-50%) translateY(0)}
+footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border-top:1px solid var(--bd)}
+</style>
+</head>
+<body>
+<div class="loading-overlay" id="loading"><div class="spinner"></div><div class="loading-msg" id="loading-msg">Aguarde…</div></div>
+<div class="toast" id="toast"></div>
+
+<nav>
+  <div class="nav-brand">MOVH</div>
+  <div class="nav-right">
+    <button class="lang-btn" id="lang-toggle" onclick="toggleLang()">🇬🇧 EN</button>
+    <button id="nav-btn" class="nav-cta" onclick="document.getElementById('section-protocolos').scrollIntoView({behavior:'smooth'})">Começar agora</button>
+  </div>
+</nav>
+
+<!-- SCREEN 1: HERO + PROTOCOLOS -->
+<div class="screen active" id="screen-protocolos">
+  <div class="hero">
+    <div id="hero-badge" class="hero-badge">🏋️ Treinamento Personalizado Online</div>
+    <h1 id="hero-titulo">Treinos feitos para <span>você evoluir</span> de verdade</h1>
+    <p id="hero-sub">Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.</p>
+    <button id="hero-btn" class="hero-cta" onclick="document.getElementById('section-protocolos').scrollIntoView({behavior:'smooth'})">Ver programas disponíveis →</button>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div id="stat-s1n" class="stat-n">100%</div><div id="stat-s1l" class="stat-l">Personalizado</div></div>
+    <div class="stat"><div id="stat-s2n" class="stat-n">App</div><div id="stat-s2l" class="stat-l">Exclusivo</div></div>
+    <div class="stat"><div id="stat-s3n" class="stat-n">Acesso</div><div id="stat-s3l" class="stat-l">Imediato</div></div>
+  </div>
+
+  <div class="section" id="section-protocolos">
+    <div id="prog-label" class="section-label">Programas</div>
+    <div id="prog-title" class="section-title">Escolha seu programa</div>
+    <div id="prog-sub" class="section-sub">Selecione o objetivo que mais combina com você</div>
+    <div class="proto-grid" id="proto-grid"></div>
+  </div>
+
+  <div class="section">
+    <div id="how-label" class="section-label">Como funciona</div>
+    <div id="how-title" class="section-title">Simples e rápido</div>
+    <div id="how-sub" class="section-sub">Do pagamento ao primeiro treino em minutos</div>
+    <div class="steps" id="steps-grid"></div>
+  </div>
+</div>
+
+<!-- SCREEN 2: PLANOS -->
+<div class="screen" id="screen-planos">
+  <div class="section" style="padding-top:48px;max-width:860px">
+    <button id="back-btn" class="back-btn" onclick="voltarProtocolos()">← Voltar</button>
+    <div id="pl-label" class="section-label">Planos</div>
+    <div class="section-title" id="planos-titulo">Escolha seu plano</div>
+    <div id="pl-sub" class="section-sub">Quanto mais tempo, maior o resultado — e o desconto</div>
+    <div class="gw-selector">
+      <button class="gw-btn active" id="gw-mp" onclick="setGw('mp')">🇧🇷 Asaas (Pix / Cartão)</button>
+      <button class="gw-btn" id="gw-stripe" onclick="setGw('stripe')">🌍 Cartão Internacional</button>
+    </div>
+    <div class="planos-grid" id="planos-grid"></div>
+  </div>
+</div>
+
+<footer id="footer-txt">© 2025 MOVH · Treinamento Personalizado</footer>
+
+<script>
+const MOVH_CONFIG = {
+  asaasKey:   '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjBhY2QxOWJlLWRiOTgtNGE1MC04ZjZkLWU1ZDVhM2RlZmRiMTo6JGFhY2hfMWU0NWQ0ZWMtNDlkNy00Yjg3LWIyYjAtZWUzMzhhOTE4ZjE4',
+  netlifyUrl: 'https://movh.netlify.app/',
+  protocolos: [{"id":"hipertrofia","icon":"💪","nome":"Hipertrofia","desc":"Ganho de massa muscular com periodização inteligente e progressão de carga semana a semana.","tags":["Intermediário","3-5x/semana","Academia"],"nomeEn":"Hypertrophy","descEn":"Muscle gain with intelligent periodisation and progressive overload week by week.","tagsEn":["Intermediate","3-5x/week","Gym"]},{"id":"emagrecimento","icon":"🔥","nome":"Emagrecimento","desc":"Combinação de treino resistido e metabólico para perda de gordura com preservação muscular.","tags":["Iniciante","3-4x/semana","Academia / Casa"],"nomeEn":"Fat Loss","descEn":"Resistance and metabolic training combined for fat loss with muscle preservation.","tagsEn":["Beginner","3-4x/week","Gym / Home"]},{"id":"forca","icon":"🏋️","nome":"Força","desc":"Foco em movimentos compostos e desenvolvimento de força máxima com periodização linear.","tags":["Intermediário","4x/semana","Academia"],"nomeEn":"Strength","descEn":"Compound movements and maximum strength development with linear periodisation.","tagsEn":["Intermediate","4x/week","Gym"]},{"id":"funcional","icon":"⚡","nome":"Funcional","desc":"Treinos variados com foco em mobilidade, condicionamento e qualidade de movimento.","tags":["Todos os níveis","3-4x/semana","Casa / Academia"],"nomeEn":"Functional","descEn":"Varied training focused on mobility, conditioning and movement quality.","tagsEn":["All levels","3-4x/week","Home / Gym"]}],
+  planos:     [{"id":"pl1","nome":"1 Mês","dias":30,"precoBR":149,"precoUK":39},{"id":"pl2","nome":"3 Meses","dias":90,"precoBR":399,"precoUK":99},{"id":"pl3","nome":"6 Meses","dias":180,"precoBR":699,"precoUK":169}],
+  i18n: {
+    pt: {
+      badge:    '🏋️ Treinamento Personalizado Online',
+      titulo:   'Treinos feitos para <span>você evoluir</span> de verdade',
+      sub:      'Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.',
+      s1n:'100%', s2n:'App', s3n:'Acesso',
+      s1l:'Personalizado', s2l:'Exclusivo', s3l:'Imediato',
+      heroBtn:'Ver programas disponíveis →', navBtn:'Começar agora',
+      progLabel:'Programas', progTitle:'Escolha seu programa', progSub:'Selecione o objetivo que mais combina com você',
+      howLabel:'Como funciona', howTitle:'Simples e rápido', howSub:'Do pagamento ao primeiro treino em minutos',
+      steps:[
+        {t:'Escolha seu programa',d:'Selecione o objetivo e o plano que melhor se encaixa no seu momento'},
+        {t:'Realize o pagamento',d:'Checkout seguro via Asaas ou Stripe, com Pix ou cartão'},
+        {t:'Receba seu acesso',d:'Você receberá o link do app personalizado e poderá começar hoje'},
+        {t:'Comece a treinar',d:'Protocolo montado especialmente para você, com progressão de carga'},
+      ],
+      plLabel:'Planos', plSub:'Quanto mais tempo, maior o resultado — e o desconto',
+      gwBR:'🇧🇷 Asaas (Pix / Cartão)', gwInt:'🌍 Cartão Internacional',
+      popular:'⭐ Mais popular', access:'dias de acesso',
+      startBtn:'Começar por', perMonth:'/mês', economy:'Economia de',
+      back:'← Voltar', footer:'© 2025 MOVH · Treinamento Personalizado',
+      langToggle:'🇬🇧 EN',
+    },
+    en: {
+      badge:    '🏋️ Personalised Training Online',
+      titulo:   'Workouts made for <span>you to grow</span> for real',
+      sub:      'Personalised programmes, load tracking and real progression. No generic spreadsheet.',
+      s1n:'100%', s2n:'App', s3n:'Acesso',
+      s1l:'Personalised', s2l:'Exclusive', s3l:'Instant Access',
+      heroBtn:'View available programmes →', navBtn:'Get started',
+      progLabel:'Programmes', progTitle:'Choose your programme', progSub:'Select the goal that suits you best',
+      howLabel:'How it works', howTitle:'Simple and fast', howSub:'From payment to first workout in minutes',
+      steps:[
+        {t:'Choose your programme',d:'Select the goal and plan that best fits your current moment'},
+        {t:'Make your payment',d:'Secure checkout via Stripe, with card or bank transfer'},
+        {t:'Get your access',d:'You will receive the link to your personalised app to start today'},
+        {t:'Start training',d:'Programme built specifically for you, with progressive overload'},
+      ],
+      plLabel:'Plans', plSub:'The longer the commitment, the bigger the result — and the saving',
+      gwBR:'🇧🇷 Asaas (Pix / Card)', gwInt:'🌍 International Card',
+      popular:'⭐ Most popular', access:'days access',
+      startBtn:'Start from', perMonth:'/month', economy:'Save',
+      back:'← Back', footer:'© 2025 MOVH · Personal Training',
+      langToggle:'🇧🇷 PT',
+    }
+  }
+};
+
+let gwAtual = 'mp';
+let protocoloSelecionado = null;
+let lang = 'pt';
+
+function t(k){ return MOVH_CONFIG.i18n[lang]?.[k] ?? MOVH_CONFIG.i18n.pt[k] ?? k; }
+
+function toggleLang(){
+  lang = lang==='pt' ? 'en' : 'pt';
+  if(lang==='en' && gwAtual==='mp') setGw('stripe');
+  if(lang==='pt' && gwAtual==='stripe') setGw('mp');
+  applyLang();
+}
+
+function applyLang(){
+  const el = id => document.getElementById(id);
+  const set = (id,v) => { if(el(id)) el(id).innerHTML=v; };
+  const setT = (id,v) => { if(el(id)) el(id).textContent=v; };
+  // Nav
+  setT('lang-toggle', t('langToggle'));
+  setT('nav-btn', t('navBtn'));
+  // Hero
+  set('hero-badge', t('badge'));
+  set('hero-titulo', t('titulo'));
+  setT('hero-sub', t('sub'));
+  setT('hero-btn', t('heroBtn'));
+  // Stats
+  setT('stat-s1n', t('s1n'));
+  setT('stat-s2n', t('s2n'));
+  setT('stat-s3n', t('s3n'));
+  setT('stat-s1l', t('s1l'));
+  setT('stat-s2l', t('s2l'));
+  setT('stat-s3l', t('s3l'));
+  // Protocolos section
+  setT('prog-label', t('progLabel'));
+  setT('prog-title', t('progTitle'));
+  setT('prog-sub', t('progSub'));
+  // How it works
+  setT('how-label', t('howLabel'));
+  setT('how-title', t('howTitle'));
+  setT('how-sub', t('howSub'));
+  // Plans section
+  setT('pl-label', t('plLabel'));
+  setT('pl-sub', t('plSub'));
+  setT('back-btn', t('back'));
+  setT('gw-mp', t('gwBR'));
+  setT('gw-stripe', t('gwInt'));
+  // Footer
+  setT('footer-txt', t('footer'));
+  // Re-render dynamic content
+  renderProtocolos();
+  renderSteps();
+  renderPlanos();
+  // Update planos titulo if on that screen
+  if(protocoloSelecionado){
+    const nome = lang==='en' ? (protocoloSelecionado.nomeEn||protocoloSelecionado.nome) : protocoloSelecionado.nome;
+    el('planos-titulo').textContent = (protocoloSelecionado.icon||'') + ' ' + nome + ' — ' + t('plLabel');
+  }
+  document.documentElement.lang = lang==='en'?'en':'pt-BR';
+}
+
+function detectarPais(){
+  fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{
+    if(d.country_code && d.country_code!=='BR'){
+      lang='en'; setGw('stripe'); applyLang();
+    }
+  }).catch(()=>{});
+}
+
+function setGw(gw){
+  gwAtual=gw;
+  document.getElementById('gw-mp').classList.toggle('active',gw==='mp');
+  document.getElementById('gw-stripe').classList.toggle('active',gw==='stripe');
+  renderPlanos();
+}
+
+function renderProtocolos(){
+  document.getElementById('proto-grid').innerHTML=MOVH_CONFIG.protocolos.map(p=>{
+    const nome = lang==='en' ? (p.nomeEn||p.nome) : p.nome;
+    const desc = lang==='en' ? (p.descEn||p.desc) : p.desc;
+    const tags = lang==='en' ? (p.tagsEn||p.tags) : p.tags;
+    return `<div class="proto-card${protocoloSelecionado?.id===p.id?' selected':''}" id="pc-${p.id}" onclick="selecionarProtocolo('${p.id}')">
+      <div class="proto-icon">${p.icon}</div>
+      <div class="proto-name">${nome}</div>
+      <div class="proto-desc">${desc}</div>
+      <div class="proto-tags">${tags.map(tg=>`<span class="proto-tag">${tg}</span>`).join('')}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderSteps(){
+  const steps = t('steps');
+  document.getElementById('steps-grid').innerHTML = steps.map((s,i)=>`
+    <div class="step">
+      <div class="step-n">${i+1}</div>
+      <div><div class="step-t">${s.t}</div><div class="step-d">${s.d}</div></div>
+    </div>`).join('');
+}
+
+function selecionarProtocolo(id){
+  protocoloSelecionado=MOVH_CONFIG.protocolos.find(p=>p.id===id);
+  document.querySelectorAll('.proto-card').forEach(c=>c.classList.remove('selected'));
+  document.getElementById('pc-'+id)?.classList.add('selected');
+  setTimeout(()=>irParaPlanos(),300);
+}
+
+function irParaPlanos(){
+  document.getElementById('screen-protocolos').classList.remove('active');
+  document.getElementById('screen-planos').classList.add('active');
+  const nome = lang==='en' ? (protocoloSelecionado?.nomeEn||protocoloSelecionado?.nome) : protocoloSelecionado?.nome;
+  document.getElementById('planos-titulo').textContent=(protocoloSelecionado?.icon||'')+' '+nome+' — '+t('plLabel');
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderPlanos();
+}
+
+function voltarProtocolos(){
+  document.getElementById('screen-planos').classList.remove('active');
+  document.getElementById('screen-protocolos').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function renderPlanos(){
+  const isBR=gwAtual==='mp';
+  const planos=MOVH_CONFIG.planos;
+  const base=planos[0];
+  document.getElementById('planos-grid').innerHTML=planos.map((p,i)=>{
+    const popular=i===1;
+    const preco=isBR?p.precoBR:p.precoUK;
+    const simbolo=isBR?'R$':'£';
+    const precoBase=isBR?base.precoBR:base.precoUK;
+    const meses=Math.round(p.dias/30);
+    const precoMensal=(preco/meses).toFixed(0);
+    const economiaTotal=i>0?Math.round(precoBase*meses-preco):0;
+    const economia=economiaTotal>0?`${t('economy')} ${simbolo}${economiaTotal}`:'&nbsp;';
+    return `<div class="plano-card${popular?' popular':''}">
+      ${popular?`<div class="plano-badge">${t('popular')}</div>`:''}
+      <div class="plano-nome">${p.nome}</div>
+      <div class="plano-dias">${p.dias} ${t('access')}</div>
+      <div class="plano-preco"><sup>${simbolo}</sup>${preco}</div>
+      <div class="plano-economia">${economia}</div>
+      <button class="plano-btn" onclick="checkout('${p.id}')">${t('startBtn')} ${simbolo}${precoMensal}${t('perMonth')}</button>
+    </div>`;
+  }).join('');
+}
+
+async function checkout(planoId){
+  const plano=MOVH_CONFIG.planos.find(p=>p.id===planoId);
+  if(!plano) return;
+  document.getElementById('loading-msg').textContent = lang==='en'?'Generating payment link…':'Gerando link de pagamento…';
+  document.getElementById('loading').classList.add('show');
+  const protoNome = lang==='en' ? (protocoloSelecionado?.nomeEn||protocoloSelecionado?.nome||'') : (protocoloSelecionado?.nome||'');
+  try{
+    if(gwAtual==='mp'){
+      const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout-asaas',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          planoNome:plano.nome+(protoNome?' ('+protoNome+')':''),
+          precoBR:plano.precoBR, dias:plano.dias, planoId,
+          protocolo:protocoloSelecionado?.id||'',
+          external_reference:'LANDING|'+planoId+'|'+plano.dias+'|'+(protocoloSelecionado?.id||''),
+          successUrl:window.location.href+'?status=success',
+          cancelUrl:window.location.href+'?status=cancel',
+        })
+      });
+      const data=await res.json();
+      if(!data.url) throw new Error(data.error||'Error');
+      window.location.href=data.url;
+    } else {
+      const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          planoNome:plano.nome+(protoNome?' ('+protoNome+')':''),
+          precoUK:plano.precoUK, dias:plano.dias, planoId,
+          protocolo:protocoloSelecionado?.id||'',
+          successUrl:window.location.href+'?status=success',
+          cancelUrl:window.location.href+'?status=cancel',
+        })
+      });
+      const data=await res.json();
+      if(!data.url) throw new Error(data.error||'Error');
+      window.location.href=data.url;
+    }
+  }catch(err){
+    document.getElementById('loading').classList.remove('show');
+    showToast((lang==='en'?'Error: ':'Erro: ')+err.message);
+  }
+}
+
+function showToast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),5000);
+}
+
+(function checkStatus(){
+  const p=new URLSearchParams(window.location.search),s=p.get('status');
+  const msgs={
+    pt:{success:'✅ Pagamento confirmado! Você receberá o acesso em breve.',failure:'❌ Pagamento não aprovado. Tente novamente.',pending:'⏳ Pagamento pendente. Confirmaremos em breve.',cancel:'Pagamento cancelado.'},
+    en:{success:'✅ Payment confirmed! You will receive access shortly.',failure:'❌ Payment not approved. Please try again.',pending:'⏳ Payment pending. We will confirm shortly.',cancel:'Payment cancelled.'}
+  };
+  if(s) setTimeout(()=>showToast((msgs[lang]||msgs.pt)[s]||''),500);
+})();
+
+// Init
+detectarPais();
+renderProtocolos();
+renderSteps();
+renderPlanos();
+</script>
+</body>
+</html>
