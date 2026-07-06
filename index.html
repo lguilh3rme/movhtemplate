@@ -90,9 +90,9 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
 <!-- SCREEN 1: HERO + PROTOCOLOS -->
 <div class="screen active" id="screen-protocolos">
   <div class="hero">
-    <div id="hero-badge" class="hero-badge">🏋️ Treinamento Personalizado Online</div>
+    <div id="hero-badge" class="hero-badge">🏋️ Treinamento Personalizado</div>
     <h1 id="hero-titulo">Treinos feitos para <span>você evoluir</span> de verdade</h1>
-    <p id="hero-sub">Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.</p>
+    <p id="hero-sub">Protocolos periodizados, acompanhamento de carga e de progresso. Sem planilha genérica.</p>
     <button id="hero-btn" class="hero-cta" onclick="document.getElementById('section-protocolos').scrollIntoView({behavior:'smooth'})">Ver programas disponíveis →</button>
   </div>
 
@@ -137,7 +137,7 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
 <script>
 const MOVH_CONFIG = {
   asaasKey:   '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjBhY2QxOWJlLWRiOTgtNGE1MC04ZjZkLWU1ZDVhM2RlZmRiMTo6JGFhY2hfMWU0NWQ0ZWMtNDlkNy00Yjg3LWIyYjAtZWUzMzhhOTE4ZjE4',
-  netlifyUrl: 'https://planmovh.netlify.app',
+  netlifyUrl: 'https://planmovh.netlify.app/',
   professorId: '750da6f3-4210-40d9-9f7e-9c328ec2fc9b',
   supabaseUrl: 'https://cfanjhuzrcgxrbfmhahi.supabase.co',
   supabaseKey: 'sb_publishable_UBIH2PU-7fkrH2gs40HW2w_Maj9dl2W',
@@ -145,9 +145,9 @@ const MOVH_CONFIG = {
   planos:     [{"id":"pl1","nome":"1 Mês","dias":30,"precoBR":149,"precoUK":39},{"id":"pl2","nome":"3 Meses","dias":90,"precoBR":399,"precoUK":99},{"id":"pl3","nome":"6 Meses","dias":180,"precoBR":699,"precoUK":169}],
   i18n: {
     pt: {
-      badge:    '🏋️ Treinamento Personalizado Online',
+      badge:    '🏋️ Treinamento Personalizado',
       titulo:   'Treinos feitos para <span>você evoluir</span> de verdade',
-      sub:      'Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.',
+      sub:      'Protocolos periodizados, acompanhamento de carga e de progresso. Sem planilha genérica.',
       s1n:'100%', s2n:'App', s3n:'Acesso',
       s1l:'Personalizado', s2l:'Exclusivo', s3l:'Imediato',
       heroBtn:'Ver programas disponíveis →', navBtn:'Começar agora',
@@ -340,8 +340,6 @@ function mbAbrirDadosCheckout(planoId){
   if (old) old.remove();
   const titulo = lang==='en' ? 'Almost there!' : 'Quase lá!';
   const sub = lang==='en' ? 'Fill in your details to continue' : 'Preencha seus dados para continuar';
-  const lblNome = lang==='en' ? 'Full name' : 'Nome completo';
-  const lblEmail = 'Email';
   const lblWhats = lang==='en' ? 'Phone / WhatsApp' : 'WhatsApp / Celular';
   const txtContinuar = lang==='en' ? 'Continue to payment' : 'Continuar para pagamento';
   const txtCancelar = lang==='en' ? 'Cancel' : 'Cancelar';
@@ -353,14 +351,6 @@ function mbAbrirDadosCheckout(planoId){
     <div style="background:#fff;border-radius:14px;padding:28px;max-width:380px;width:100%">
       <h3 style="margin:0 0 4px;font-size:18px">${titulo}</h3>
       <p style="margin:0 0 18px;font-size:12px;color:#888">${sub}</p>
-      <div style="margin-bottom:12px">
-        <label style="display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:4px">${lblNome}</label>
-        <input id="dc-nome" type="text" required style="width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box">
-      </div>
-      <div style="margin-bottom:12px">
-        <label style="display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:4px">${lblEmail}</label>
-        <input id="dc-email" type="email" required style="width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box">
-      </div>
       <div style="margin-bottom:18px">
         <label style="display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:4px">${lblWhats}</label>
         <input id="dc-whatsapp" type="tel" required placeholder="${phPhone}" style="width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box">
@@ -369,17 +359,15 @@ function mbAbrirDadosCheckout(planoId){
       <button onclick="document.getElementById('dados-checkout-overlay').remove()" style="display:block;width:100%;background:none;border:none;color:#888;font-size:12px;cursor:pointer;padding:6px">${txtCancelar}</button>
     </div>`;
   document.body.appendChild(div);
-  setTimeout(()=>document.getElementById('dc-nome')?.focus(),50);
+  setTimeout(()=>document.getElementById('dc-whatsapp')?.focus(),50);
 }
 
 function mbConfirmarDadosCheckout(planoId){
-  const nome = document.getElementById('dc-nome')?.value.trim();
-  const email = document.getElementById('dc-email')?.value.trim();
   const whatsapp = document.getElementById('dc-whatsapp')?.value.trim();
-  const msgObrig = lang==='en' ? 'Please fill in all fields.' : 'Preencha todos os campos.';
-  if (!nome || !email || !whatsapp) { showToast(msgObrig); return; }
+  const msgObrig = lang==='en' ? 'Please fill in your WhatsApp number.' : 'Preencha o WhatsApp.';
+  if (!whatsapp) { showToast(msgObrig); return; }
   document.getElementById('dados-checkout-overlay')?.remove();
-  checkout(planoId, { nome, email, whatsapp });
+  checkout(planoId, { whatsapp });
 }
 
 async function checkout(planoId, dadosCliente){
@@ -489,13 +477,31 @@ async function plInitLanding(){
         if (row) {
           if (Array.isArray(row.planos) && row.planos.length) MOVH_CONFIG.planos = row.planos;
           if (Array.isArray(row.protocolos) && row.protocolos.length) MOVH_CONFIG.protocolos = row.protocolos;
-          if (row.config && row.config.netlifyUrl) MOVH_CONFIG.netlifyUrl = row.config.netlifyUrl;
+          const cfg = row.config;
+          if (cfg) {
+            if (cfg.netlifyUrl) MOVH_CONFIG.netlifyUrl = cfg.netlifyUrl;
+            const conv = s => (s||'').replace(/\|(.+?)\|/g,'<span>$1</span>');
+            const pt = MOVH_CONFIG.i18n.pt, en = MOVH_CONFIG.i18n.en;
+            if (cfg.badge)  pt.badge  = cfg.badge;
+            if (cfg.titulo) pt.titulo = conv(cfg.titulo);
+            if (cfg.sub)    pt.sub    = cfg.sub;
+            if (cfg.s1n) { pt.s1n = cfg.s1n; en.s1n = cfg.s1n; }
+            if (cfg.s2n) { pt.s2n = cfg.s2n; en.s2n = cfg.s2n; }
+            if (cfg.s3n) { pt.s3n = cfg.s3n; en.s3n = cfg.s3n; }
+            if (cfg.s1l) pt.s1l = cfg.s1l;
+            if (cfg.s2l) pt.s2l = cfg.s2l;
+            if (cfg.s3l) pt.s3l = cfg.s3l;
+            if (cfg.badgeEn)  en.badge  = cfg.badgeEn;
+            if (cfg.tituloEn) en.titulo = conv(cfg.tituloEn);
+            if (cfg.subEn)    en.sub    = cfg.subEn;
+          }
         }
       }
     } catch(e) {
       // silencioso — fallback para os dados embutidos
     }
   }
+  applyLang(); // aplica badge/titulo/sub/stats sincronizados (ou os embutidos, se não houve fetch)
   detectarPais();
   renderProtocolos();
   renderSteps();
