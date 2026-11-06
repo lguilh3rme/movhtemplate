@@ -137,7 +137,7 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
       <button class="pres-tab" id="pt-dup" onclick="setPres('dup')">Em dupla</button>
     </div>
     <div id="pres-body"></div>
-    <div class="pres-comb"><b>Combinados</b><br>• Adaptação paga por Pix antes da 1ª sessão.<br>• Horários combinados previamente.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.</div>
+    <div class="pres-comb"><b>Combinados</b><br>• Pagamento por Pix; a adaptação é paga antes da 1ª sessão.<br>• Horários combinados previamente.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.</div>
     <a class="pres-cta" id="pres-cta" target="_blank" rel="noopener" href="#">COMEÇAR!<small>Chame no WhatsApp e agende sua adaptação.</small></a>
   </div>
 </div>
@@ -150,10 +150,11 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
     <div class="section-title" id="planos-titulo">Escolha seu plano</div>
     <div id="pl-sub" class="section-sub">Quanto mais tempo, maior o resultado — e o desconto</div>
     <div class="gw-selector">
-      <button class="gw-btn active" id="gw-mp" onclick="setGw('mp')">🇧🇷 Asaas (Pix / Cartão)</button>
+      <button class="gw-btn active" id="gw-mp" onclick="setGw('mp')">🇧🇷 Pix / Cartão</button>
       <button class="gw-btn" id="gw-stripe" onclick="setGw('stripe')">🌍 Cartão Internacional</button>
     </div>
     <div class="planos-grid auto" id="planos-grid"></div>
+    <div id="pl-pix-nota" style="text-align:center;font-size:12px;color:var(--t3);margin-top:18px">Pix é a forma principal de pagamento. Cartão (parcelado) apenas nos planos acima de 1 mês.</div>
   </div>
 </div>
 
@@ -161,7 +162,6 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
 
 <script>
 const MOVH_CONFIG = {
-  asaasKey:   '$aact_prod_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OjBhY2QxOWJlLWRiOTgtNGE1MC04ZjZkLWU1ZDVhM2RlZmRiMTo6JGFhY2hfMWU0NWQ0ZWMtNDlkNy00Yjg3LWIyYjAtZWUzMzhhOTE4ZjE4',
   netlifyUrl: 'https://planmovh.netlify.app/',
   professorId: '750da6f3-4210-40d9-9f7e-9c328ec2fc9b',
   supabaseUrl: 'https://cfanjhuzrcgxrbfmhahi.supabase.co',
@@ -180,12 +180,12 @@ const MOVH_CONFIG = {
       howLabel:'Como funciona', howTitle:'Simples e rápido', howSub:'Do pagamento ao primeiro treino em minutos',
       steps:[
         {t:'Escolha seu programa',d:'Selecione o objetivo e o plano que melhor se encaixa no seu momento'},
-        {t:'Realize o pagamento',d:'Checkout seguro via Asaas ou Stripe, com Pix ou cartão'},
+        {t:'Realize o pagamento',d:'Pix é a forma principal; cartão apenas nos planos acima de 1 mês'},
         {t:'Receba seu acesso',d:'Você receberá o link do app personalizado e poderá começar hoje'},
         {t:'Comece a treinar',d:'Protocolo montado especialmente para você, com progressão de carga'},
       ],
       plLabel:'Planos', plSub:'Quanto mais tempo, maior o resultado — e o desconto',
-      gwBR:'🇧🇷 Asaas (Pix / Cartão)', gwInt:'🌍 Cartão Internacional',
+      gwBR:'🇧🇷 Pix / Cartão', gwInt:'🌍 Cartão Internacional',
       popular:'⭐ Mais popular', access:'dias de acesso', entry:'Comece por aqui', adNome:'Adaptação online', adDias:'4 semanas · tudo incluso', adSub:'Anamnese, avaliação postural, app e ajustes',
       startBtn:'Começar por', perMonth:'/mês', economy:'Economia de',
       back:'← Voltar', footer:'© 2025 MOVH · Treinamento Personalizado',
@@ -207,7 +207,7 @@ const MOVH_CONFIG = {
         {t:'Start training',d:'Programme built specifically for you, with progressive overload'},
       ],
       plLabel:'Plans', plSub:'The longer the commitment, the bigger the result — and the saving',
-      gwBR:'🇧🇷 Asaas (Pix / Card)', gwInt:'🌍 International Card',
+      gwBR:'🇧🇷 Pix / Card', gwInt:'🌍 International Card',
       popular:'⭐ Most popular', access:'days access', entry:'Start here', adNome:'Online adaptation', adDias:'4 weeks · all included', adSub:'Assessment, app and adjustments',
       startBtn:'Start from', perMonth:'/month', economy:'Save',
       back:'← Back', footer:'© 2025 MOVH · Personal Training',
@@ -341,9 +341,9 @@ const PRES_WA='5527988225340';
 let presTipo='ind';
 const PRES={
   ind:{ad:{p:220,s:55,sub:'Treino 100% focado em você.',lab:'Individual'},
-       pk:[{n:'Avulsa',p:80,s:80,sub:'uma sessão',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:576,s:72,sub:'pacote',nt:'10% de desconto.',pop:1},{n:'12 sessões',f:'3x na semana',p:816,s:68,sub:'pacote',nt:'15% de desconto.'}]},
+       pk:[{n:'Avulsa',p:77,s:77,sub:'uma sessão',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:576,s:72,sub:'pacote',nt:'Economia de R$ 40.',pop:1},{n:'12 sessões',f:'3x na semana',p:816,s:68,sub:'pacote',nt:'Economia de R$ 108.'}]},
   dup:{ad:{p:180,s:45,sub:'Cada um paga a sua parte.',lab:'Em dupla · por pessoa'},
-       pk:[{n:'Avulsa',p:77,s:77,sub:'por pessoa',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:528,s:66,sub:'por pessoa',nt:'Pacote de 8 sessões.',pop:1},{n:'12 sessões',f:'3x na semana',p:744,s:62,sub:'por pessoa',nt:'Melhor valor.'}]}
+       pk:[{n:'Avulsa',p:70,s:70,sub:'por pessoa',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:528,s:66,sub:'por pessoa',nt:'Economia de R$ 32.',pop:1},{n:'12 sessões',f:'3x na semana',p:744,s:62,sub:'por pessoa',nt:'Economia de R$ 96.'}]}
 };
 function setPres(k){presTipo=k;renderPresencial();}
 function renderPresencial(){
@@ -400,6 +400,7 @@ function renderPlanos(){
       <button class="plano-btn" onclick="mbAbrirDadosCheckout('${p.id}')">${t('startBtn')} ${simbolo}${precoMensal}${t('perMonth')}</button>
     </div>`;
   }).join('');
+  const nt=document.getElementById('pl-pix-nota'); if(nt) nt.style.display=isBR?'':'none';
   renderPresencial();
 }
 
