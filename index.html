@@ -1,164 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>MOVH — Treinamento Personalizado / Personal Training</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0B1220">
+<title>MOVH · Treino com acompanhamento</title>
+<meta name="description" content="Consultoria online com app e treino periodizado, ou personal presencial na Bodytech Moxuara. Comece pela adaptação.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--P:#A31D1D;--Pd:#6E1313;--Pl:#3A1414;--G:#1A9E72;--bg:#0E0D0C;--card:#18140F;--tx:#F4EEE4;--t2:#B8B0A6;--t3:#8A8178;--bd:rgba(244,238,228,0.14);--cl:#201C17;--r:14px;--rs:8px;--font-d:'Plus Jakarta Sans',-apple-system,sans-serif;--font-b:'Inter',-apple-system,sans-serif}
+:root{--bg:#0B1220;--card:#111A2E;--card2:#16213a;--bd:#1F2B45;--P:#D62839;--P2:#FF4D5A;--cream:#F3EAD8;--mute:#9AA3BD;--soft:#C9C2B0;--ok:#3DDC97;--r:22px;--font:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-b);background:var(--bg);color:var(--tx);min-height:100vh}
-nav{background:var(--card);border-bottom:1px solid var(--bd);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px}
-.nav-brand{font-family:var(--font-d);font-size:20px;font-weight:800;color:var(--tx);letter-spacing:-.02em}
-.nav-right{display:flex;align-items:center;gap:10px}
-.lang-btn{background:var(--cl);border:1px solid var(--bd);border-radius:var(--rs);padding:6px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;color:var(--t2);transition:all .15s}
-.lang-btn:hover{border-color:var(--P);color:var(--P)}
-.nav-cta{background:var(--P);color:#fff;border:none;border-radius:var(--rs);padding:8px 18px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap}
-.hero{text-align:center;padding:72px 24px 48px;max-width:680px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--Pl);color:var(--Pd);border:1px solid #D6D3F8;border-radius:99px;padding:5px 14px;font-size:12px;font-weight:600;margin-bottom:20px}
-.hero h1{font-family:var(--font-d);font-size:clamp(26px,5vw,46px);font-weight:800;line-height:1.15;letter-spacing:-.02em;margin-bottom:16px}
-.hero h1 span{color:var(--P)}
-.hero p{font-size:16px;color:var(--t2);line-height:1.6;margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto}
-.hero-cta{background:var(--P);color:#fff;border:none;border-radius:var(--r);padding:14px 32px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 16px rgba(124,116,220,.35);transition:all .15s}
-.hero-cta:hover{background:var(--Pd);transform:translateY(-1px)}
-.stats{display:flex;justify-content:center;gap:40px;padding:0 24px 56px;flex-wrap:wrap}
-.stat{text-align:center}
-.stat-n{font-family:var(--font-d);font-size:28px;font-weight:800;color:var(--P)}
-.stat-l{font-size:12px;color:var(--t2);margin-top:2px}
-.section{max-width:960px;margin:0 auto;padding:0 24px 72px}
-.section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--P);margin-bottom:10px}
-.section-title{font-family:var(--font-d);font-size:clamp(20px,3vw,30px);font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
-.section-sub{font-size:14px;color:var(--t2);margin-bottom:36px;line-height:1.6}
-.proto-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.proto-card{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:24px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden}
-.proto-card:hover{border-color:var(--P);box-shadow:0 8px 24px rgba(124,116,220,.15);transform:translateY(-2px)}
-.proto-card.selected{border-color:var(--P);background:var(--Pl)}
-.proto-card.selected::after{content:'✓';position:absolute;top:12px;right:14px;background:var(--P);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
-.proto-icon{font-size:32px;margin-bottom:12px}
-.proto-name{font-family:var(--font-d);font-size:16px;font-weight:700;margin-bottom:6px}
-.proto-desc{font-size:12px;color:var(--t2);line-height:1.5}
-.proto-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:12px}
-.proto-tag{background:var(--cl);border:1px solid var(--bd);border-radius:99px;padding:3px 9px;font-size:10px;color:var(--t2);font-weight:500}
-.planos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:780px;margin:0 auto}
-@media(max-width:600px){.planos-grid{grid-template-columns:1fr}.plano-card.popular{transform:none}}
-.plano-card{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:28px 24px;text-align:center;transition:all .2s;position:relative}
-.plano-card:hover{border-color:var(--P);box-shadow:0 8px 24px rgba(124,116,220,.15)}
-.plano-card.popular{border-color:var(--P);transform:scale(1.04)}
-.planos-grid.auto{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-width:960px}
-.plano-card.entrada{border-color:var(--P)}
-.pres-tabs{display:flex;gap:8px;justify-content:center;margin:0 auto 20px}
-.pres-tab{padding:9px 18px;border-radius:99px;border:2px solid var(--P);background:var(--card);color:var(--P);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
-.pres-tab.active{background:var(--P);color:#fff}
-.pres-sec{font-family:var(--font-d);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);max-width:960px;margin:22px auto 12px}
-.pres-grid.one{max-width:480px}
-.pres-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:960px;margin:0 auto}
-.pres-nota{max-width:960px;margin:16px auto 0;background:var(--P);color:#fff;border-radius:var(--r);padding:14px 18px;font-size:13px;line-height:1.5}
-.pres-comb{max-width:960px;margin:16px auto 0;border:1.5px dashed var(--bd);border-radius:var(--r);padding:14px 18px;font-size:12px;color:var(--t2);line-height:1.7}
-.pres-cta{display:block;max-width:960px;margin:20px auto 0;background:var(--P);color:#fff;border-radius:var(--r);padding:18px;text-align:center;font-weight:800;font-size:18px;text-decoration:none}
-.pres-cta small{display:block;font-weight:500;font-size:12px;margin-top:4px;opacity:.9}
-.plano-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--P);color:#fff;border-radius:99px;padding:4px 14px;font-size:11px;font-weight:700;white-space:nowrap}
-.plano-nome{font-family:var(--font-d);font-size:15px;font-weight:700;margin-bottom:4px}
-.plano-dias{font-size:11px;color:var(--t3);margin-bottom:16px}
-.plano-preco{font-family:var(--font-d);font-size:32px;font-weight:800;margin-bottom:4px}
-.plano-preco sup{font-size:16px;font-weight:600;vertical-align:super}
-.plano-economia{font-size:11px;color:var(--G);font-weight:600;margin-bottom:20px;min-height:16px}
-.plano-btn{width:100%;padding:12px;border:none;border-radius:var(--rs);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
-.plano-card.popular .plano-btn{background:var(--P);color:#fff;box-shadow:0 4px 12px rgba(124,116,220,.35)}
-.plano-card:not(.popular) .plano-btn{background:var(--card);color:var(--P);border:2px solid var(--P)}
-.plano-card:not(.popular) .plano-btn:hover{background:var(--Pl)}
-.gw-selector{display:flex;gap:10px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
-.gw-btn{display:flex;align-items:center;gap:8px;padding:8px 16px;border:2px solid var(--bd);border-radius:var(--rs);background:var(--card);cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;color:var(--t2);transition:all .15s}
-.gw-btn.active{border-color:var(--P);color:var(--P);background:var(--Pl)}
-.steps{display:flex;gap:24px;flex-wrap:wrap;justify-content:center}
-.step{display:flex;gap:14px;align-items:flex-start;max-width:240px}
-.step-n{width:32px;height:32px;border-radius:50%;background:var(--Pl);color:var(--P);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-t{font-weight:600;font-size:13px;margin-bottom:3px}
-.step-d{font-size:12px;color:var(--t2);line-height:1.5}
-.screen{display:none}.screen.active{display:block}
-.back-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:none;color:var(--t2);font-size:13px;cursor:pointer;font-family:inherit;padding:0;margin-bottom:28px}
-.loading-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center;flex-direction:column;gap:16px}
-.loading-overlay.show{display:flex}
-.spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-msg{color:#fff;font-size:14px;font-weight:600}
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#1A1A18;color:#fff;border-radius:var(--r);padding:12px 20px;font-size:13px;font-weight:500;z-index:300;transition:transform .3s;white-space:nowrap;max-width:90vw}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--cream);line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:84px}
+a{color:inherit}
+button{font-family:inherit}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(11,18,32,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand{font-weight:800;letter-spacing:.14em;font-size:17px}
+.brand b{color:var(--P2)}
+.hd-r{display:flex;gap:8px;align-items:center}
+.pill{border:1px solid var(--bd);background:transparent;color:var(--mute);border-radius:99px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer}
+.pill:hover{color:var(--cream);border-color:var(--mute)}
+.wa{background:var(--P);border:none;color:#fff;border-radius:99px;padding:8px 16px;font-size:13px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+/* hero */
+.hero{padding:44px 0 26px;text-align:center}
+.eyebrow{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--P2);border:1px solid var(--bd);background:var(--card);border-radius:99px;padding:6px 14px;margin-bottom:18px}
+h1{font-size:clamp(34px,7vw,60px);line-height:1.04;font-weight:800;letter-spacing:-.02em;max-width:820px;margin:0 auto 16px}
+h1 span{color:var(--P2)}
+.sub{font-size:clamp(15px,2.4vw,18px);color:var(--soft);max-width:600px;margin:0 auto 26px}
+.sub b{color:var(--cream)}
+.cta-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:16px;padding:16px 26px;font-size:16px;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .12s,background .12s}
+.btn:active{transform:scale(.98)}
+.btn-p{background:var(--P);color:#fff;box-shadow:0 10px 28px rgba(214,40,57,.35)}
+.btn-p:hover{background:#e4303f}
+.btn-g{background:transparent;color:var(--cream);border:1.5px solid var(--bd)}
+.btn-g:hover{border-color:var(--mute)}
+.trust{display:flex;gap:8px 18px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:13px;color:var(--mute)}
+.trust span:before{content:"✓";color:var(--ok);font-weight:800;margin-right:6px}
+/* seções */
+section{padding:34px 0}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);margin-bottom:6px}
+h2{font-size:clamp(24px,4.4vw,34px);font-weight:800;letter-spacing:-.01em;margin-bottom:6px}
+.lead{color:var(--soft);font-size:15px;margin-bottom:20px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--bd);border-radius:99px;padding:4px;margin:6px 0 22px}
+.seg button{border:none;background:transparent;color:var(--mute);font-weight:700;font-size:14px;padding:10px 20px;border-radius:99px;cursor:pointer}
+.seg button.on{background:var(--P);color:#fff}
+.seg.small button{padding:8px 16px;font-size:13px}
+/* cards */
+.feat{background:linear-gradient(160deg,#18233f,#111A2E);border:1.5px solid var(--P);border-radius:var(--r);padding:26px;display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:center}
+.tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--P2);margin-bottom:6px}
+.feat h3{font-size:22px;font-weight:800;letter-spacing:.02em;margin-bottom:8px}
+.price{display:flex;align-items:flex-start;gap:4px;line-height:1}
+.price sup{font-size:22px;font-weight:800;margin-top:8px}
+.price big{font-size:76px;font-weight:800;letter-spacing:-.03em}
+.price-s{font-size:14px;color:var(--soft);margin-top:6px}
+.ticks{list-style:none;display:grid;gap:7px;font-size:14px;color:var(--soft);margin-bottom:16px}
+.ticks li:before{content:"✓";color:var(--ok);font-weight:800;margin-right:8px}
+.note{background:var(--P);color:#fff;border-radius:16px;padding:14px 18px;font-size:14px;margin:14px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{position:relative;background:var(--card);border:1px solid var(--bd);border-radius:var(--r);padding:22px 20px;display:flex;flex-direction:column;gap:4px}
+.card.pop{border-color:var(--P);background:var(--card2)}
+.card .bdg{position:absolute;top:-11px;left:18px;background:var(--P);color:#fff;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;border-radius:99px;padding:4px 11px}
+.card h4{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.card .fq{font-size:12px;color:var(--mute);min-height:17px}
+.card .price big{font-size:50px}
+.card .price sup{font-size:17px;margin-top:5px}
+.card .per{font-size:14px;font-weight:700;margin-top:6px}
+.card .eco{font-size:12px;font-weight:700;color:var(--ok);min-height:17px}
+.card .how{font-size:11.5px;color:var(--mute);margin:6px 0 12px;min-height:16px}
+.card .btn{padding:12px;font-size:14px;border-radius:13px;margin-top:auto;width:100%}
+.card:not(.pop) .btn{background:transparent;border:1.5px solid var(--P);color:var(--P2)}
+.card:not(.pop) .btn:hover{background:rgba(214,40,57,.12)}
+.card.pop .btn{background:var(--P);color:#fff}
+.sec-h{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);margin:26px 0 12px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.pay{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.pay div{flex:1 1 220px;border:1.5px dashed var(--bd);border-radius:16px;padding:13px 16px;font-size:13px;color:var(--soft)}
+.pay b{color:var(--cream)}
+.paynote{margin-top:16px;font-size:13px;color:var(--mute);text-align:center}
+.comb{margin-top:16px;border:1.5px dashed var(--bd);border-radius:var(--r);padding:16px 20px;font-size:13px;color:var(--soft);line-height:1.8}
+.comb b{color:var(--cream)}
+/* passos */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.step{border-top:2px solid var(--P);padding-top:12px}
+.step i{font-style:normal;font-weight:800;font-size:34px;color:var(--P2);display:block;line-height:1}
+.step b{display:block;margin:6px 0 4px;font-size:16px}
+.step p{font-size:14px;color:var(--soft)}
+.inc{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;margin-top:22px;font-size:14px;color:var(--soft)}
+.inc div{border-bottom:1px solid var(--bd);padding:8px 0}
+.inc div:before{content:"✓";color:var(--ok);font-weight:800;margin-right:8px}
+/* faq */
+details{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--P2);font-weight:800;font-size:20px;line-height:1}
+details[open] summary:after{content:"–"}
+details p{margin-top:10px;font-size:14px;color:var(--soft)}
+/* cta final e rodapé */
+.final{background:linear-gradient(135deg,var(--P),#a31d2b);border-radius:28px;padding:34px 24px;text-align:center;margin:20px 0}
+.final h2{margin-bottom:8px}
+.final p{opacity:.92;margin-bottom:18px}
+.final .btn{background:#fff;color:#a31d2b}
+footer{text-align:center;padding:28px 20px 10px;font-size:12px;color:var(--mute);border-top:1px solid var(--bd);margin-top:30px}
+/* barra fixa mobile */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(11,18,32,.96);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:10px 14px;display:flex;gap:10px;align-items:center;transform:translateY(110%);transition:transform .25s}
+.bar.show{transform:none}
+.bar .t{flex:1;font-size:12.5px;line-height:1.25;color:var(--soft)}
+.bar .t b{display:block;color:var(--cream);font-size:15px}
+.bar .btn{padding:13px 20px;font-size:14px;border-radius:14px}
+.bar .wa{padding:13px 16px;border-radius:14px}
+@media(min-width:900px){.bar{display:none}body{padding-bottom:0}}
+@media(max-width:720px){.feat{grid-template-columns:1fr;padding:22px}.price big{font-size:64px}}
+/* overlays */
+.ov{position:fixed;inset:0;background:rgba(3,7,15,.72);display:flex;align-items:center;justify-content:center;z-index:200;padding:16px}
+.modal{background:var(--card);border:1px solid var(--bd);border-radius:24px;padding:26px;max-width:400px;width:100%}
+.modal h3{font-size:19px;margin-bottom:6px}
+.modal p{font-size:13px;color:var(--mute);margin-bottom:14px}
+.modal input{width:100%;padding:14px;border-radius:14px;border:1.5px solid var(--bd);background:var(--bg);color:var(--cream);font-size:16px;margin-bottom:12px}
+.modal input:focus{outline:none;border-color:var(--P)}
+.modal .btn{width:100%;margin-bottom:8px}
+.modal .x{background:none;border:none;color:var(--mute);font-size:13px;cursor:pointer;width:100%;padding:8px}
+.loading{display:none;position:fixed;inset:0;background:rgba(3,7,15,.75);z-index:300;align-items:center;justify-content:center;flex-direction:column;gap:14px}
+.loading.show{display:flex}
+.spin{width:40px;height:40px;border:3px solid rgba(255,255,255,.25);border-top-color:#fff;border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(120px);background:#fff;color:#111;border-radius:14px;padding:12px 18px;font-size:13px;font-weight:600;z-index:400;transition:transform .3s;max-width:90vw}
 .toast.show{transform:translateX(-50%) translateY(0)}
-footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border-top:1px solid var(--bd)}
+.hide{display:none!important}
 </style>
 </head>
 <body>
-<div class="loading-overlay" id="loading"><div class="spinner"></div><div class="loading-msg" id="loading-msg">Aguarde…</div></div>
+<div class="loading" id="loading"><div class="spin"></div><div id="loading-msg" style="font-weight:600;font-size:14px">Aguarde…</div></div>
 <div class="toast" id="toast"></div>
 
-<nav>
-  <div class="nav-brand">MOVH</div>
-  <div class="nav-right">
-    <button class="lang-btn" id="lang-toggle" onclick="toggleLang()">🇬🇧 EN</button>
-    <button id="nav-btn" class="nav-cta" onclick="document.getElementById('section-protocolos').scrollIntoView({behavior:'smooth'})">Começar agora</button>
+<header><div class="wrap hd">
+  <div class="brand">MOV<b>H</b></div>
+  <div class="hd-r">
+    <button class="pill" id="lang-toggle" onclick="toggleLang()">🇬🇧 EN</button>
+    <a class="wa" id="wa-top" target="_blank" rel="noopener" href="#">WhatsApp</a>
   </div>
-</nav>
+</div></header>
 
-<!-- SCREEN 1: HERO + PROTOCOLOS -->
-<div class="screen active" id="screen-protocolos">
-  <div class="hero">
-    <div id="hero-badge" class="hero-badge">🏋️ Treinamento Personalizado</div>
-    <h1 id="hero-titulo">Treinos feitos para <span>você evoluir</span> de verdade</h1>
-    <p id="hero-sub">Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.</p>
-    <button id="hero-btn" class="hero-cta" onclick="document.getElementById('section-protocolos').scrollIntoView({behavior:'smooth'})">Ver programas disponíveis →</button>
+<main>
+<div class="wrap hero" id="topo">
+  <div class="eyebrow" id="hero-badge">Treino com acompanhamento</div>
+  <h1 id="hero-titulo">Seu treino, com <span>acompanhamento</span> de verdade.</h1>
+  <p class="sub" id="hero-sub">Protocolo periodizado, <b>app com vídeos</b> e ajustes direto pelo <b>WhatsApp</b>. Online ou presencial.</p>
+  <div class="cta-row">
+    <button class="btn btn-p" id="hero-cta1" onclick="abrirAdaptacao()">Começar por R$120</button>
+    <button class="btn btn-g" id="hero-cta2" onclick="irPara('planos')">Ver planos</button>
   </div>
-
-  <div class="stats">
-    <div class="stat"><div id="stat-s1n" class="stat-n">100%</div><div id="stat-s1l" class="stat-l">Personalizado</div></div>
-    <div class="stat"><div id="stat-s2n" class="stat-n">App</div><div id="stat-s2l" class="stat-l">Exclusivo</div></div>
-    <div class="stat"><div id="stat-s3n" class="stat-n">Acesso</div><div id="stat-s3l" class="stat-l">Imediato</div></div>
-  </div>
-
-  <div class="section" id="section-protocolos">
-    <div id="prog-label" class="section-label">Programas</div>
-    <div id="prog-title" class="section-title">Escolha seu programa</div>
-    <div id="prog-sub" class="section-sub">Selecione o objetivo que mais combina com você</div>
-    <div class="proto-grid" id="proto-grid"></div>
-  </div>
-
-  <div class="section">
-    <div id="how-label" class="section-label">Como funciona</div>
-    <div id="how-title" class="section-title">Simples e rápido</div>
-    <div id="how-sub" class="section-sub">Do pagamento ao primeiro treino em minutos</div>
-    <div class="steps" id="steps-grid"></div>
-  </div>
-
-  <div class="section" id="section-presencial" style="display:none">
-    <div class="section-label">Personal presencial</div>
-    <div class="section-title">Seu treino, acompanhado de perto</div>
-    <div class="section-sub">Bodytech Moxuara · toda sessão começa com preparação (mobilidade ou aquecimento específico) e segue com treino de força</div>
-    <div class="pres-tabs">
-      <button class="pres-tab active" id="pt-ind" onclick="setPres('ind')">Individual</button>
-      <button class="pres-tab" id="pt-dup" onclick="setPres('dup')">Em dupla</button>
-    </div>
-    <div id="pres-body"></div>
-    <div class="pres-comb"><b>Combinados</b><br>• Pagamento por Pix; a adaptação é paga antes da 1ª sessão.<br>• Horários combinados previamente.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.</div>
-    <a class="pres-cta" id="pres-cta" target="_blank" rel="noopener" href="#">COMEÇAR!<small>Chame no WhatsApp e agende sua adaptação.</small></a>
-  </div>
+  <div class="trust" id="trust"></div>
 </div>
 
-<!-- SCREEN 2: PLANOS -->
-<div class="screen" id="screen-planos">
-  <div class="section" style="padding-top:48px;max-width:1000px">
-    <button id="back-btn" class="back-btn" onclick="voltarProtocolos()">← Voltar</button>
-    <div id="pl-label" class="section-label">Planos</div>
-    <div class="section-title" id="planos-titulo">Escolha seu plano</div>
-    <div id="pl-sub" class="section-sub">Quanto mais tempo, maior o resultado — e o desconto</div>
-    <div class="gw-selector">
-      <button class="gw-btn active" id="gw-mp" onclick="setGw('mp')">🇧🇷 Pix / Cartão</button>
-      <button class="gw-btn" id="gw-stripe" onclick="setGw('stripe')">🌍 Cartão Internacional</button>
-    </div>
-    <div class="planos-grid auto" id="planos-grid"></div>
-    <div id="pl-pix-nota" style="text-align:center;font-size:12px;color:var(--t3);margin-top:18px">Pix é a forma principal de pagamento. Cartão (parcelado) apenas nos planos acima de 1 mês.</div>
+<section id="planos"><div class="wrap">
+  <div class="lbl" id="pl-lbl">Escolha como treinar</div>
+  <h2 id="pl-h2">Comece pela adaptação</h2>
+  <p class="lead" id="pl-lead">Uma entrada que cabe no bolso: você começa sem pagar o pacote inteiro e só continua se gostar.</p>
+  <div class="seg" id="seg-modo">
+    <button class="on" id="m-online" onclick="setModo('online')">Online</button>
+    <button id="m-pres" onclick="setModo('pres')">Presencial</button>
   </div>
-</div>
 
-<footer id="footer-txt">© 2025 MOVH · Treinamento Personalizado</footer>
+  <div id="painel-online">
+    <div id="on-feat"></div>
+    <div class="sec-h"><span id="on-depois">Depois da adaptação</span><span id="on-escolha">Escolha seu plano</span></div>
+    <div class="grid" id="on-grid"></div>
+    <div class="pay" id="on-extra"></div>
+    <div class="paynote" id="paynote"></div>
+  </div>
+
+  <div id="painel-pres" class="hide">
+    <div class="seg small" id="seg-pres">
+      <button class="on" id="p-ind" onclick="setPres('ind')">Individual</button>
+      <button id="p-dup" onclick="setPres('dup')">Em dupla</button>
+    </div>
+    <div id="pr-feat"></div>
+    <div class="note" id="pr-note">Uma entrada que cabe no bolso. Você começa sem pagar o pacote inteiro e a gente continua depois da adaptação.</div>
+    <div class="sec-h"><span>Depois da adaptação</span><span id="pr-sub">Escolha seu pacote</span></div>
+    <div class="grid" id="pr-grid"></div>
+    <div class="comb" id="pr-comb"><b>Combinados</b><br>• Pagamento por Pix; a adaptação é paga antes da 1ª sessão.<br>• Horários combinados previamente; avisando com 12 horas de antecedência, a sessão é remarcada.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.</div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="lbl" id="how-lbl">Como funciona</div>
+  <h2 id="how-h2">Simples e direto</h2>
+  <div class="steps" id="steps"></div>
+  <div class="inc" id="inc"></div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="lbl">Dúvidas</div>
+  <h2 id="faq-h2">Perguntas rápidas</h2>
+  <div id="faq" style="margin-top:14px"></div>
+</div></section>
+
+<div class="wrap"><div class="final">
+  <h2 id="fin-h">Pronto para começar?</h2>
+  <p id="fin-p">Faça sua adaptação e receba o acesso ao app hoje.</p>
+  <button class="btn" id="fin-btn" onclick="abrirAdaptacao()">Começar por R$120</button>
+</div></div>
+</main>
+
+<footer id="footer-txt">© 2026 MOVH · Treinamento Personalizado</footer>
+
+<div class="bar" id="bar">
+  <div class="t" id="bar-t"><b>Adaptação online · R$120</b>4 semanas · tudo incluso</div>
+  <button class="btn btn-p" id="bar-btn" onclick="abrirAdaptacao()">Começar</button>
+  <a class="wa" id="wa-bar" target="_blank" rel="noopener" href="#" aria-label="WhatsApp">💬</a>
+</div>
 
 <script>
 const MOVH_CONFIG = {
@@ -166,425 +220,334 @@ const MOVH_CONFIG = {
   professorId: '750da6f3-4210-40d9-9f7e-9c328ec2fc9b',
   supabaseUrl: 'https://cfanjhuzrcgxrbfmhahi.supabase.co',
   supabaseKey: 'sb_publishable_UBIH2PU-7fkrH2gs40HW2w_Maj9dl2W',
-  protocolos: [{"id":"hipertrofia","icon":"💪","nome":"Hipertrofia","desc":"Ganho de massa muscular com periodização inteligente e progressão de carga semana a semana.","tags":["Intermediário","3-5x/semana","Academia"],"nomeEn":"Hypertrophy","descEn":"Muscle gain with intelligent periodisation and progressive overload week by week.","tagsEn":["Intermediate","3-5x/week","Gym"]},{"id":"emagrecimento","icon":"🔥","nome":"Emagrecimento","desc":"Combinação de treino resistido e metabólico para perda de gordura com preservação muscular.","tags":["Iniciante","3-4x/semana","Academia / Casa"],"nomeEn":"Fat Loss","descEn":"Resistance and metabolic training combined for fat loss with muscle preservation.","tagsEn":["Beginner","3-4x/week","Gym / Home"]},{"id":"funcional","icon":"🦴","nome":"Mobilidade e RML","desc":"Treinos variados com foco em mobilidade, condicionamento e qualidade de movimento.","tags":["Todos os níveis","3-4x/semana","Casa / Academia"],"nomeEn":"LME and Mobility","descEn":"Varied training focused on mobility, conditioning and movement quality.","tagsEn":["All levels","3-4x/week","Home / Gym"]}],
-  planos:     [{"id":"pl1","nome":"Mensal","dias":30,"precoBR":180,"precoUK":39,"tipo":"novo"},{"id":"pl6","nome":"Bimestral","dias":60,"precoBR":320,"precoUK":69,"tipo":"novo"},{"id":"pl2","nome":"Trimestral","dias":90,"precoBR":420,"precoUK":99,"tipo":"novo"}],
-  i18n: {
-    pt: {
-      badge:    '🏋️ Treinamento Personalizado',
-      titulo:   'Treinos feitos para <span>você evoluir</span> de verdade',
-      sub:      'Protocolos periodizados, acompanhamento de carga e progressão real. Sem planilha genérica.',
-      s1n:'100%', s2n:'App', s3n:'Acesso',
-      s1l:'Personalizado', s2l:'Exclusivo', s3l:'Imediato',
-      heroBtn:'Ver programas disponíveis →', navBtn:'Começar agora',
-      progLabel:'Programas', progTitle:'Escolha seu programa', progSub:'Selecione o objetivo que mais combina com você',
-      howLabel:'Como funciona', howTitle:'Simples e rápido', howSub:'Do pagamento ao primeiro treino em minutos',
-      steps:[
-        {t:'Escolha seu programa',d:'Selecione o objetivo e o plano que melhor se encaixa no seu momento'},
-        {t:'Realize o pagamento',d:'Pix é a forma principal; cartão apenas nos planos acima de 1 mês'},
-        {t:'Receba seu acesso',d:'Você receberá o link do app personalizado e poderá começar hoje'},
-        {t:'Comece a treinar',d:'Protocolo montado especialmente para você, com progressão de carga'},
-      ],
-      plLabel:'Planos', plSub:'Quanto mais tempo, maior o resultado — e o desconto',
-      gwBR:'🇧🇷 Pix / Cartão', gwInt:'🌍 Cartão Internacional',
-      popular:'⭐ Mais popular', access:'dias de acesso', entry:'Comece por aqui', adNome:'Adaptação online', adDias:'4 semanas · tudo incluso', adSub:'Anamnese, avaliação postural, app e ajustes',
-      startBtn:'Começar por', perMonth:'/mês', economy:'Economia de',
-      back:'← Voltar', footer:'© 2025 MOVH · Treinamento Personalizado',
-      langToggle:'🇬🇧 EN',
-    },
-    en: {
-      badge:    '🏋️ Personalised Training',
-      titulo:   'Workouts made for <span>you to grow</span> for real',
-      sub:      'Personalised programmes, load tracking and real progression. No generic spreadsheet.',
-      s1n:'100%', s2n:'App', s3n:'Acesso',
-      s1l:'Personalised', s2l:'Exclusive', s3l:'Instant Access',
-      heroBtn:'View available programmes →', navBtn:'Get started',
-      progLabel:'Programmes', progTitle:'Choose your programme', progSub:'Select the goal that suits you best',
-      howLabel:'How it works', howTitle:'Simple and fast', howSub:'From payment to first workout in minutes',
-      steps:[
-        {t:'Choose your programme',d:'Select the goal and plan that best fits your current moment'},
-        {t:'Make your payment',d:'Secure checkout via Stripe, with card or bank transfer'},
-        {t:'Get your access',d:'You will receive the link to your personalised app to start today'},
-        {t:'Start training',d:'Programme built specifically for you, with progressive overload'},
-      ],
-      plLabel:'Plans', plSub:'The longer the commitment, the bigger the result — and the saving',
-      gwBR:'🇧🇷 Pix / Card', gwInt:'🌍 International Card',
-      popular:'⭐ Most popular', access:'days access', entry:'Start here', adNome:'Online adaptation', adDias:'4 weeks · all included', adSub:'Assessment, app and adjustments',
-      startBtn:'Start from', perMonth:'/month', economy:'Save',
-      back:'← Back', footer:'© 2025 MOVH · Personal Training',
-      langToggle:'🇧🇷 PT',
-    }
-  }
+  planos: [
+    {id:'pl1',nome:'Mensal',dias:30,precoBR:180,precoUK:39,tipo:'novo'},
+    {id:'pl6',nome:'Bimestral',dias:60,precoBR:320,precoUK:69,tipo:'novo'},
+    {id:'pl2',nome:'Trimestral',dias:90,precoBR:420,precoUK:99,tipo:'novo'},
+    {id:'pl4',nome:'Renovação',dias:30,precoBR:150,precoUK:0,tipo:'renovacao'},
+    {id:'pl5',nome:'Reativação',dias:30,precoBR:165,precoUK:0,tipo:'reativacao'}
+  ],
+  presencial: [
+    {id:'pr_i_ad',grupo:'Presencial individual',nome:'Adaptação (4 sessões)',dias:30,precoBR:220,sessoes:4},
+    {id:'pr_i_av',grupo:'Presencial individual',nome:'Avulsa',dias:7,precoBR:77,sessoes:1},
+    {id:'pr_i_8',grupo:'Presencial individual',nome:'8 sessões',dias:30,precoBR:576,sessoes:8},
+    {id:'pr_i_12',grupo:'Presencial individual',nome:'12 sessões',dias:30,precoBR:816,sessoes:12},
+    {id:'pr_d_ad',grupo:'Presencial dupla (por pessoa)',nome:'Adaptação (4 sessões)',dias:30,precoBR:180,sessoes:4},
+    {id:'pr_d_av',grupo:'Presencial dupla (por pessoa)',nome:'Avulsa',dias:7,precoBR:70,sessoes:1},
+    {id:'pr_d_8',grupo:'Presencial dupla (por pessoa)',nome:'8 sessões',dias:30,precoBR:528,sessoes:8},
+    {id:'pr_d_12',grupo:'Presencial dupla (por pessoa)',nome:'12 sessões',dias:30,precoBR:744,sessoes:12}
+  ],
+  pagamento: {cartaoMinDias:31, whatsapp:'5527988225340'},
+  heroCustom: {}
 };
-
-let gwAtual = 'mp';
-let protocoloSelecionado = null;
-let lang = 'pt';
-
-function t(k){ return MOVH_CONFIG.i18n[lang]?.[k] ?? MOVH_CONFIG.i18n.pt[k] ?? k; }
-
-function toggleLang(){
-  lang = lang==='pt' ? 'en' : 'pt';
-  if(lang==='en' && gwAtual==='mp') setGw('stripe');
-  if(lang==='pt' && gwAtual==='stripe') setGw('mp');
-  applyLang();
-}
-
-function applyLang(){
-  const el = id => document.getElementById(id);
-  const set = (id,v) => { if(el(id)) el(id).innerHTML=v; };
-  const setT = (id,v) => { if(el(id)) el(id).textContent=v; };
-  // Nav
-  setT('lang-toggle', t('langToggle'));
-  setT('nav-btn', t('navBtn'));
-  // Hero
-  set('hero-badge', t('badge'));
-  set('hero-titulo', t('titulo'));
-  setT('hero-sub', t('sub'));
-  setT('hero-btn', t('heroBtn'));
-  // Stats
-  setT('stat-s1n', t('s1n'));
-  setT('stat-s2n', t('s2n'));
-  setT('stat-s3n', t('s3n'));
-  setT('stat-s1l', t('s1l'));
-  setT('stat-s2l', t('s2l'));
-  setT('stat-s3l', t('s3l'));
-  // Protocolos section
-  setT('prog-label', t('progLabel'));
-  setT('prog-title', t('progTitle'));
-  setT('prog-sub', t('progSub'));
-  // How it works
-  setT('how-label', t('howLabel'));
-  setT('how-title', t('howTitle'));
-  setT('how-sub', t('howSub'));
-  // Plans section
-  setT('pl-label', t('plLabel'));
-  setT('pl-sub', t('plSub'));
-  setT('back-btn', t('back'));
-  setT('gw-mp', t('gwBR'));
-  setT('gw-stripe', t('gwInt'));
-  // Footer
-  setT('footer-txt', t('footer'));
-  // Re-render dynamic content
-  renderProtocolos();
-  renderSteps();
-  renderPlanos();
-  // Update planos titulo if on that screen
-  if(protocoloSelecionado){
-    const nome = lang==='en' ? (protocoloSelecionado.nomeEn||protocoloSelecionado.nome) : protocoloSelecionado.nome;
-    el('planos-titulo').textContent = (protocoloSelecionado.icon||'') + ' ' + nome + ' — ' + t('plLabel');
-  }
-  document.documentElement.lang = lang==='en'?'en':'pt-BR';
-}
-
-function detectarPais(){
-  fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{
-    if(d.country_code && d.country_code!=='BR'){
-      lang='en'; setGw('stripe'); applyLang();
-    }
-  }).catch(()=>{});
-}
-
-function setGw(gw){
-  gwAtual=gw;
-  document.getElementById('gw-mp').classList.toggle('active',gw==='mp');
-  document.getElementById('gw-stripe').classList.toggle('active',gw==='stripe');
-  renderPlanos();
-}
-
-function renderProtocolos(){
-  document.getElementById('proto-grid').innerHTML=MOVH_CONFIG.protocolos.map(p=>{
-    const nome = lang==='en' ? (p.nomeEn||p.nome) : p.nome;
-    const desc = lang==='en' ? (p.descEn||p.desc) : p.desc;
-    const tags = lang==='en' ? (p.tagsEn||p.tags) : p.tags;
-    return `<div class="proto-card${protocoloSelecionado?.id===p.id?' selected':''}" id="pc-${p.id}" onclick="selecionarProtocolo('${p.id}')">
-      <div class="proto-icon">${p.icon}</div>
-      <div class="proto-name">${nome}</div>
-      <div class="proto-desc">${desc}</div>
-      <div class="proto-tags">${tags.map(tg=>`<span class="proto-tag">${tg}</span>`).join('')}</div>
-    </div>`;
-  }).join('');
-}
-
-function renderSteps(){
-  const steps = t('steps');
-  document.getElementById('steps-grid').innerHTML = steps.map((s,i)=>`
-    <div class="step">
-      <div class="step-n">${i+1}</div>
-      <div><div class="step-t">${s.t}</div><div class="step-d">${s.d}</div></div>
-    </div>`).join('');
-}
-
-function selecionarProtocolo(id){
-  protocoloSelecionado=MOVH_CONFIG.protocolos.find(p=>p.id===id);
-  document.querySelectorAll('.proto-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('pc-'+id)?.classList.add('selected');
-  setTimeout(()=>irParaPlanos(),300);
-}
-
-function irParaPlanos(){
-  document.getElementById('screen-protocolos').classList.remove('active');
-  document.getElementById('screen-planos').classList.add('active');
-  const nome = lang==='en' ? (protocoloSelecionado?.nomeEn||protocoloSelecionado?.nome) : protocoloSelecionado?.nome;
-  document.getElementById('planos-titulo').textContent=(protocoloSelecionado?.icon||'')+' '+nome+' — '+t('plLabel');
-  window.scrollTo({top:0,behavior:'smooth'});
-  renderPlanos();
-}
-
-function voltarProtocolos(){
-  document.getElementById('screen-planos').classList.remove('active');
-  document.getElementById('screen-protocolos').classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
 const PL_ADAPT={id:'ol_ad',nome:'Adaptação online',dias:28,precoBR:120,precoUK:0};
-const PRES_WA='5527988225340';
-let presTipo='ind';
-const PRES={
-  ind:{ad:{p:220,s:55,sub:'Treino 100% focado em você.',lab:'Individual'},
-       pk:[{n:'Avulsa',p:77,s:77,sub:'uma sessão',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:576,s:72,sub:'pacote',nt:'Economia de R$ 40.',pop:1},{n:'12 sessões',f:'3x na semana',p:816,s:68,sub:'pacote',nt:'Economia de R$ 108.'}]},
-  dup:{ad:{p:180,s:45,sub:'Cada um paga a sua parte.',lab:'Em dupla · por pessoa'},
-       pk:[{n:'Avulsa',p:70,s:70,sub:'por pessoa',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:528,s:66,sub:'por pessoa',nt:'Economia de R$ 32.',pop:1},{n:'12 sessões',f:'3x na semana',p:744,s:62,sub:'por pessoa',nt:'Economia de R$ 96.'}]}
+const TXT={
+ pt:{
+  badge:'Treino com acompanhamento',
+  titulo:'Seu treino, com <span>acompanhamento</span> de verdade.',
+  sub:'Protocolo periodizado, <b>app com vídeos</b> e ajustes direto pelo <b>WhatsApp</b>. Online ou presencial.',
+  cta1:p=>'Começar por R$'+p, cta2:'Ver planos',
+  trust:['Pix ou cartão','Sem fidelidade','App com vídeos','Ajustes pelo WhatsApp'],
+  plLbl:'Escolha como treinar', plH2:'Comece pela adaptação', plLead:'Uma entrada que cabe no bolso: você começa sem pagar o pacote inteiro e só continua se gostar.',
+  online:'Online', pres:'Presencial', ind:'Individual', dup:'Em dupla',
+  here:'Comece por aqui', newOnly:'Para quem é novo', adTitle:'Adaptação online', adSub:'4 semanas · tudo incluso',
+  adTicks:['Anamnese e PAR-Q','Avaliação postural','Protocolo periodizado no app','Ajustes pelo WhatsApp'],
+  start:'Começar agora', after:'Depois da adaptação', choosePlan:'Escolha seu plano', choosePack:'Escolha seu pacote',
+  popular:'Mais escolhido', perMonth:'por mês', per:n=>'por '+n+' meses', permo:v=>'R$ '+v+' por mês', save:v=>'Economia de R$ '+v,
+  noLock:'Sem fidelidade, mês a mês.', onlyPix:'Pagamento por Pix', pixCard:n=>'Pix ou cartão (até '+n+'x)',
+  renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative com treino novo por R$ '+v+'.',
+  paynote:'Pix é a forma principal de pagamento. Cartão (parcelado) apenas nos planos acima de 1 mês.',
+  prAd:'Adaptação · 4 sessões', prAdSub:'4 sessões', perSess:v=>'R$ '+v+' por sessão', perPerson:'por pessoa', oneSess:'uma sessão', pack:'pacote',
+  prAvTip:'Para testar ou complementar.', wk2:'2x na semana', wk3:'3x na semana', soon:'Chamar no WhatsApp',
+  howLbl:'Como funciona', howH2:'Simples e direto',
+  steps:[['Escolha','Comece pela adaptação online ou presencial, ou direto num plano.'],['Pague','Pix é o principal. Cartão parcelado nos planos acima de 1 mês.'],['Receba o acesso','Você recebe o link do app, responde a anamnese e eu monto seu treino.'],['Treine','Protocolo periodizado, vídeos, registro de cargas e ajustes pelo WhatsApp.']],
+  inc:['Protocolo periodizado','App com vídeos','Registro de carga','Anamnese e PAR-Q','Ajustes pelo WhatsApp','Avaliação postural'],
+  faqH:'Perguntas rápidas',
+  faq:[['Como eu pago?','Pix é a forma principal. O cartão (parcelado) aparece apenas nos planos acima de 1 mês. Mensal, adaptação e presencial são por Pix.'],['Tem fidelidade?','Não. O mensal é mês a mês, e a adaptação existe justamente para você começar sem pagar o pacote inteiro.'],['Como recebo o treino?','Depois do pagamento você recebe o link do app, responde a anamnese e o PAR-Q e eu monto o protocolo para o seu corpo.'],['E se eu não puder ir à sessão presencial?','Avisando com 12 horas de antecedência, a sessão é remarcada.']],
+  finH:'Pronto para começar?', finP:'Faça sua adaptação e receba o acesso ao app hoje.',
+  footer:'© 2026 MOVH · Treinamento Personalizado',
+  barT:p=>'<b>Adaptação online · R$'+p+'</b>4 semanas · tudo incluso', barBtn:'Começar',
+  wa:'WhatsApp', waMsg:'Oi! Quero saber mais sobre os planos da MOVH.', waPres:t=>t==='ind'?'Oi! Quero começar a adaptação do personal presencial (individual).':'Oi! Quero começar a adaptação do personal presencial em dupla.',
+  ph:'WhatsApp / Celular', lblWhats:'Qual o seu WhatsApp?', ask:'Usamos só para enviar seu acesso e combinar os ajustes.', goPay:'Ir para o pagamento', cancel:'Cancelar',
+  gen:'Gerando link de pagamento…', needWa:'Preencha o WhatsApp.', err:'Erro: ',
+  chooseTitle:'Escolha como pagar', cash:'Pix / à vista', card:n=>'Cartão de crédito (até '+n+'x)',
+  combPres:'<b>Combinados</b><br>• Pagamento por Pix; a adaptação é paga antes da 1ª sessão.<br>• Horários combinados previamente; avisando com 12 horas de antecedência, a sessão é remarcada.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.',
+  prNote:'<b>Uma entrada que cabe no bolso.</b> Você começa sem pagar o pacote inteiro e a gente continua depois da adaptação.',
+  grpInd:'Presencial individual', grpDup:'Presencial dupla (por pessoa)',
+  status:{success:'✅ Pagamento confirmado! Você receberá o acesso em breve.',failure:'❌ Pagamento não aprovado. Tente novamente.',pending:'⏳ Pagamento pendente. Confirmaremos em breve.',cancel:'Pagamento cancelado.'},
+  renewTitle:'🔄 Renovação de acesso'
+ },
+ en:{
+  badge:'Coaching that follows you',
+  titulo:'Your training, with <span>real support</span>.',
+  sub:'Periodised programme, <b>app with videos</b> and adjustments via <b>WhatsApp</b>.',
+  cta1:p=>'Start from £'+p, cta2:'See plans',
+  trust:['Card payment','No lock-in','App with videos','WhatsApp adjustments'],
+  plLbl:'Choose how to train', plH2:'Choose your plan', plLead:'Longer plans cost less per month.',
+  online:'Online', pres:'In person', ind:'Individual', dup:'Pair',
+  here:'Start here', newOnly:'', adTitle:'', adSub:'', adTicks:[],
+  start:'Start now', after:'Plans', choosePlan:'Choose your plan', choosePack:'',
+  popular:'Most popular', perMonth:'per month', per:n=>'for '+n+' months', permo:v=>'£'+v+' per month', save:v=>'Save £'+v,
+  noLock:'No lock-in, month to month.', onlyPix:'', pixCard:n=>'Card',
+  renew:v=>'', react:v=>'',
+  paynote:'Secure card checkout.',
+  prAd:'', prAdSub:'', perSess:v=>'', perPerson:'', oneSess:'', pack:'', prAvTip:'', wk2:'', wk3:'', soon:'',
+  howLbl:'How it works', howH2:'Simple and direct',
+  steps:[['Choose','Pick the plan that fits you.'],['Pay','Secure card checkout.'],['Get access','You receive the app link and fill in a short assessment.'],['Train','Periodised programme, videos, load tracking and WhatsApp adjustments.']],
+  inc:['Periodised programme','App with videos','Load tracking','Assessment form','WhatsApp adjustments','Postural assessment'],
+  faqH:'Quick questions',
+  faq:[['How do I pay?','Secure card checkout.'],['Is there a lock-in?','No. Plans are month to month or fixed-term at a discount.'],['How do I receive my training?','After payment you receive the app link, fill in the assessment and I build your programme.']],
+  finH:'Ready to start?', finP:'Pick a plan and get access to the app today.',
+  footer:'© 2026 MOVH · Personalised Training',
+  barT:p=>'<b>Plans from £'+p+'</b>Secure card checkout', barBtn:'See plans',
+  wa:'WhatsApp', waMsg:'Hi! I would like to know more about the MOVH plans.', waPres:t=>'',
+  ph:'Phone / WhatsApp', lblWhats:'Your WhatsApp / phone', ask:'Used only to send your access and arrange adjustments.', goPay:'Go to payment', cancel:'Cancel',
+  gen:'Generating payment link…', needWa:'Please fill in your WhatsApp number.', err:'Error: ',
+  chooseTitle:'Choose how to pay', cash:'Cash', card:n=>'Credit card (up to '+n+'x)',
+  combPres:'', prNote:'', grpInd:'', grpDup:'',
+  status:{success:'✅ Payment confirmed! You will receive access shortly.',failure:'❌ Payment not approved. Please try again.',pending:'⏳ Payment pending. We will confirm shortly.',cancel:'Payment cancelled.'},
+  renewTitle:'🔄 Renew access'
+ }
 };
-function setPres(k){presTipo=k;renderPresencial();}
-function renderPresencial(){
-  const sec=document.getElementById('section-presencial');
-  if(!sec) return;
-  sec.style.display=lang==='en'?'none':'';
-  const d=PRES[presTipo];
-  document.getElementById('pt-ind').classList.toggle('active',presTipo==='ind');
-  document.getElementById('pt-dup').classList.toggle('active',presTipo==='dup');
-  const card=(o,entrada)=>(o=o||{},`<div class="plano-card${o.pop||entrada?' popular':''}" style="${o.pop||entrada?'transform:none':''}">
-      ${o.pop?'<div class="plano-badge">Mais escolhido</div>':''}${entrada?'<div class="plano-badge">Comece por aqui</div>':''}
-      <div class="plano-nome">${entrada?'Adaptação · 4 sessões':o.n}</div>
-      <div class="plano-dias">${entrada?d.ad.lab:(o.f||'&nbsp;')}</div>
-      <div class="plano-preco"><sup>R$</sup>${entrada?d.ad.p:o.p}</div>
-      <div class="plano-economia" style="color:var(--t2)">${entrada?'4 sessões':o.sub}</div>
-      <div style="font-size:13px;font-weight:700;margin-bottom:4px">R$ ${entrada?d.ad.s:o.s} por sessão</div>
-      <div style="font-size:11px;color:var(--t3)">${entrada?d.ad.sub:o.nt}</div>
-    </div>`);
-  document.getElementById('pres-body').innerHTML=
-    '<div class="pres-sec">Comece por aqui · fase de adaptação</div><div class="pres-grid one">'+card(null,true)+'</div>'+
-    '<div class="pres-nota"><b>Uma entrada que cabe no bolso.</b> Você começa sem pagar o pacote inteiro e a gente continua depois da adaptação.</div>'+
-    '<div class="pres-sec">Depois da adaptação · escolha seu pacote</div><div class="pres-grid">'+d.pk.map(o=>card(o,false)).join('')+'</div>';
-  const msg=presTipo==='ind'?'Oi! Quero começar a adaptação do personal presencial (individual).':'Oi! Quero começar a adaptação do personal presencial em dupla.';
-  document.getElementById('pres-cta').href='https://wa.me/'+PRES_WA+'?text='+encodeURIComponent(msg);
+let lang='pt', gwAtual='mp', modo='online', presTipo='ind';
+const $=id=>document.getElementById(id);
+const t=k=>{const v=TXT[lang][k]; return v===undefined?TXT.pt[k]:v;};
+const waNum=()=>String((MOVH_CONFIG.pagamento&&MOVH_CONFIG.pagamento.whatsapp)||'5527988225340').replace(/\D/g,'');
+const waLink=msg=>'https://wa.me/'+waNum()+'?text='+encodeURIComponent(msg);
+const maxParcelas=d=>d<=30?1:d<=90?3:6;
+const novos=()=>MOVH_CONFIG.planos.filter(p=>(p.tipo||'novo')==='novo');
+const porTipo=k=>MOVH_CONFIG.planos.find(p=>p.tipo===k);
+
+function irPara(id){ const el=$(id); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }
+function setModo(m){ modo=m; render(); }
+function setPres(k){ presTipo=k; renderPres(); }
+function toggleLang(){ lang=lang==='pt'?'en':'pt'; if(lang==='en'){ gwAtual='stripe'; modo='online'; } else gwAtual='mp'; render(); }
+function showToast(msg){ const el=$('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),5000); }
+
+function render(){
+  const isBR=gwAtual==='mp';
+  document.documentElement.lang=lang==='en'?'en':'pt-BR';
+  $('lang-toggle').textContent=lang==='pt'?'🇬🇧 EN':'🇧🇷 PT';
+  const hc=MOVH_CONFIG.heroCustom||{};
+  $('hero-badge').textContent=(lang==='pt'&&hc.badge)||(lang==='en'&&hc.badgeEn)||t('badge');
+  $('hero-titulo').innerHTML=(lang==='pt'&&hc.titulo)||(lang==='en'&&hc.tituloEn)||t('titulo');
+  $('hero-sub').innerHTML=(lang==='pt'&&hc.sub)||(lang==='en'&&hc.subEn)||t('sub');
+  const first=novos()[0];
+  const heroPrice=isBR?PL_ADAPT.precoBR:(first?first.precoUK:'');
+  $('hero-cta1').textContent=t('cta1')(heroPrice);
+  $('hero-cta2').textContent=t('cta2');
+  $('trust').innerHTML=t('trust').map(x=>'<span>'+x+'</span>').join('');
+  $('pl-lbl').textContent=t('plLbl'); $('pl-h2').textContent=t('plH2'); $('pl-lead').textContent=t('plLead');
+  $('m-online').textContent=t('online'); $('m-pres').textContent=t('pres');
+  $('seg-modo').classList.toggle('hide',!isBR);
+  $('m-online').classList.toggle('on',modo==='online'); $('m-pres').classList.toggle('on',modo==='pres');
+  $('painel-online').classList.toggle('hide',modo!=='online');
+  $('painel-pres').classList.toggle('hide',modo!=='pres');
+  $('how-lbl').textContent=t('howLbl'); $('how-h2').textContent=t('howH2');
+  $('steps').innerHTML=t('steps').map((s,i)=>'<div class="step"><i>'+(i+1)+'</i><b>'+s[0]+'</b><p>'+s[1]+'</p></div>').join('');
+  $('inc').innerHTML=t('inc').map(x=>'<div>'+x+'</div>').join('');
+  $('faq-h2').textContent=t('faqH');
+  $('faq').innerHTML=t('faq').map(f=>'<details><summary>'+f[0]+'</summary><p>'+f[1]+'</p></details>').join('');
+  $('fin-h').textContent=t('finH'); $('fin-p').textContent=t('finP');
+  $('fin-btn').textContent=isBR?t('cta1')(PL_ADAPT.precoBR):t('cta2');
+  $('footer-txt').textContent=t('footer');
+  $('bar-t').innerHTML=t('barT')(isBR?PL_ADAPT.precoBR:(first?first.precoUK:''));
+  $('bar-btn').textContent=t('barBtn');
+  const wl=waLink(t('waMsg')); $('wa-top').href=wl; $('wa-bar').href=wl; $('wa-top').textContent='💬 '+t('wa');
+  renderOnline(); renderPres();
 }
 
-function renderPlanos(){
+function metodoTxt(p){
+  const min=+((MOVH_CONFIG.pagamento||{}).cartaoMinDias||31);
+  if(lang==='en') return '';
+  return p.dias>=min?t('pixCard')(maxParcelas(p.dias)):t('onlyPix');
+}
+
+function renderOnline(){
   const isBR=gwAtual==='mp';
-  const planos=MOVH_CONFIG.planos.filter(p=>(p.tipo||'novo')==='novo');
-  const base=planos[0];
-  const ad=isBR?`<div class="plano-card entrada">
-      <div class="plano-badge">${t('entry')}</div>
-      <div class="plano-nome">${t('adNome')}</div>
-      <div class="plano-dias">${t('adDias')}</div>
-      <div class="plano-preco"><sup>R$</sup>${PL_ADAPT.precoBR}</div>
-      <div class="plano-economia">${t('adSub')}</div>
-      <button class="plano-btn" onclick="mbAbrirDadosCheckout('${PL_ADAPT.id}')">${t('startBtn')} R$${PL_ADAPT.precoBR}</button>
-    </div>`:'';
-  document.getElementById('planos-grid').innerHTML=ad+planos.map((p,i)=>{
-    const popular=i===1;
-    const preco=isBR?p.precoBR:p.precoUK;
-    const simbolo=isBR?'R$':'£';
-    const precoBase=isBR?base.precoBR:base.precoUK;
-    const meses=Math.round(p.dias/30);
-    const precoMensal=(preco/meses).toFixed(0);
-    const economiaTotal=i>0?Math.round(precoBase*meses-preco):0;
-    const economia=economiaTotal>0?`${t('economy')} ${simbolo}${economiaTotal}`:'&nbsp;';
-    return `<div class="plano-card${popular?' popular':''}">
-      ${popular?`<div class="plano-badge">${t('popular')}</div>`:''}
-      <div class="plano-nome">${p.nome}</div>
-      <div class="plano-dias">${p.dias} ${t('access')}</div>
-      <div class="plano-preco"><sup>${simbolo}</sup>${preco}</div>
-      <div class="plano-economia">${economia}</div>
-      <button class="plano-btn" onclick="mbAbrirDadosCheckout('${p.id}')">${t('startBtn')} ${simbolo}${precoMensal}${t('perMonth')}</button>
-    </div>`;
+  if(isBR){
+    $('on-feat').innerHTML=`<div class="feat">
+      <div><span class="tag">${t('here')}</span><h3>${t('adTitle')}</h3>
+        <div class="price"><sup>R$</sup><big>${PL_ADAPT.precoBR}</big></div><div class="price-s">${t('adSub')} · ${t('onlyPix')}</div></div>
+      <div><ul class="ticks">${t('adTicks').map(x=>'<li>'+x+'</li>').join('')}</ul>
+        <button class="btn btn-p" style="width:100%" onclick="abrirAdaptacao()">${t('cta1')(PL_ADAPT.precoBR)}</button></div></div>`;
+  } else $('on-feat').innerHTML='';
+  const planos=novos(); const base=planos[0];
+  const popIdx=planos.length>2?1:-1;
+  const simb=isBR?'R$':'£';
+  $('on-depois').textContent=t('after'); $('on-escolha').textContent=t('choosePlan');
+  $('on-grid').innerHTML=planos.map((p,i)=>{
+    const preco=isBR?p.precoBR:p.precoUK; if(!preco) return '';
+    const meses=Math.max(1,Math.round(p.dias/30));
+    const mensal=Math.round(preco/meses);
+    const bpreco=isBR?base.precoBR:base.precoUK;
+    const eco=i>0?Math.round(bpreco*meses-preco):0;
+    const pop=i===popIdx;
+    return `<div class="card${pop?' pop':''}">${pop?'<div class="bdg">'+t('popular')+'</div>':''}
+      <h4>${p.nome}</h4><div class="fq">${meses>1?t('per')(meses):t('perMonth')}</div>
+      <div class="price"><sup>${simb}</sup><big>${preco}</big></div>
+      <div class="per">${meses>1?(isBR?t('permo')(mensal):t('permo')(mensal)):(i===0?t('noLock'):'')}</div>
+      <div class="eco">${eco>0?(isBR?t('save')(eco):'Save £'+eco):'&nbsp;'}</div>
+      <div class="how">${isBR?metodoTxt(p):''}</div>
+      <button class="btn" onclick="mbAbrirDadosCheckout('${p.id}')">${t('start')}</button></div>`;
   }).join('');
-  const nt=document.getElementById('pl-pix-nota'); if(nt) nt.style.display=isBR?'':'none';
-  renderPresencial();
+  const ren=porTipo('renovacao'), rea=porTipo('reativacao');
+  $('on-extra').innerHTML=isBR?((ren?'<div>'+t('renew')(ren.precoBR)+'</div>':'')+(rea?'<div>'+t('react')(rea.precoBR)+'</div>':'')):'';
+  $('paynote').textContent=t('paynote');
+}
+
+function presGrupo(){ return presTipo==='ind'?['Presencial individual']:['Presencial dupla (por pessoa)']; }
+function renderPres(){
+  const lista=(MOVH_CONFIG.presencial||[]).filter(x=>presGrupo().includes(x.grupo));
+  const ad=lista.find(x=>/_ad$/.test(x.id)); const av=lista.find(x=>/_av$/.test(x.id));
+  const pk=lista.filter(x=>x!==ad);
+  $('p-ind').classList.toggle('on',presTipo==='ind'); $('p-dup').classList.toggle('on',presTipo==='dup');
+  $('p-ind').textContent=t('ind'); $('p-dup').textContent=t('dup');
+  $('pr-note').innerHTML=t('prNote'); $('pr-comb').innerHTML=t('combPres');
+  $('pr-sub').textContent=t('choosePack');
+  if(ad){
+    const s=ad.sessoes>0?Math.round(ad.precoBR/ad.sessoes):0;
+    $('pr-feat').innerHTML=`<div class="feat">
+      <div><span class="tag">${t('here')}</span><h3>${t('prAd')}</h3>
+        <div class="price"><sup>R$</sup><big>${ad.precoBR}</big></div>
+        <div class="price-s">${presTipo==='dup'?t('perPerson')+' · ':''}${t('perSess')(s)}</div></div>
+      <div><ul class="ticks"><li>${presTipo==='dup'?'Cada um paga a sua parte':'Treino 100% focado em você'}</li><li>Preparação (mobilidade ou aquecimento) em toda sessão</li><li>Treino de força com registro de cargas</li><li>${t('onlyPix')} antes da 1ª sessão</li></ul>
+        <a class="btn btn-p" style="width:100%" target="_blank" rel="noopener" href="${waLink(t('waPres')(presTipo))}">${t('soon')}</a></div></div>`;
+  } else $('pr-feat').innerHTML='';
+  $('pr-grid').innerHTML=pk.map(p=>{
+    const sess=p.sessoes||0, s=sess>0?Math.round(p.precoBR/sess):p.precoBR;
+    const eco=(av&&sess>1)?Math.round(av.precoBR*sess-p.precoBR):0;
+    const pop=sess===8;
+    const freq=sess===8?t('wk2'):sess===12?t('wk3'):'';
+    return `<div class="card${pop?' pop':''}">${pop?'<div class="bdg">'+t('popular')+'</div>':''}
+      <h4>${p.nome}</h4><div class="fq">${freq}</div>
+      <div class="price"><sup>R$</sup><big>${p.precoBR}</big></div>
+      <div class="per">${t('perSess')(s)}</div>
+      <div class="eco">${eco>0?t('save')(eco):'&nbsp;'}</div>
+      <div class="how">${sess===1?t('prAvTip'):(presTipo==='dup'?t('perPerson'):t('pack'))}</div>
+      <a class="btn" target="_blank" rel="noopener" href="${waLink((presTipo==='ind'?'Oi! Quero o pacote ':'Oi! Quero (em dupla) o pacote ')+p.nome+' do personal presencial.')}">${t('soon')}</a></div>`;
+  }).join('');
+}
+
+function abrirAdaptacao(){
+  if(gwAtual==='mp') mbAbrirDadosCheckout(PL_ADAPT.id);
+  else irPara('planos');
 }
 
 function mbAbrirDadosCheckout(planoId){
-  const old = document.getElementById('dados-checkout-overlay');
-  if (old) old.remove();
-  const titulo = lang==='en' ? 'Almost there!' : 'Quase lá!';
-  const sub = lang==='en' ? 'Fill in your details to continue' : 'Preencha seus dados para continuar';
-  const lblWhats = lang==='en' ? 'Phone / WhatsApp' : 'WhatsApp / Celular';
-  const txtContinuar = lang==='en' ? 'Continue to payment' : 'Continuar para pagamento';
-  const txtCancelar = lang==='en' ? 'Cancel' : 'Cancelar';
-  const phPhone = lang==='en' ? '(00) 00000-0000' : '(00) 00000-0000';
-  const div = document.createElement('div');
-  div.id = 'dados-checkout-overlay';
-  div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px';
-  div.innerHTML = `
-    <div style="background:#fff;border-radius:14px;padding:28px;max-width:380px;width:100%">
-      <h3 style="margin:0 0 4px;font-size:18px">${titulo}</h3>
-      <p style="margin:0 0 18px;font-size:12px;color:#888">${sub}</p>
-      <div style="margin-bottom:18px">
-        <label style="display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:4px">${lblWhats}</label>
-        <input id="dc-whatsapp" type="tel" required placeholder="${phPhone}" style="width:100%;padding:10px 12px;border:1.5px solid #ddd;border-radius:8px;font-size:14px;box-sizing:border-box">
-      </div>
-      <button onclick="mbConfirmarDadosCheckout('${planoId}')" style="display:block;width:100%;padding:13px;margin-bottom:10px;border-radius:10px;border:none;background:#111;color:#fff;font-weight:700;font-size:14px;cursor:pointer">${txtContinuar}</button>
-      <button onclick="document.getElementById('dados-checkout-overlay').remove()" style="display:block;width:100%;background:none;border:none;color:#888;font-size:12px;cursor:pointer;padding:6px">${txtCancelar}</button>
-    </div>`;
+  const old=$('dados-overlay'); if(old) old.remove();
+  const div=document.createElement('div'); div.id='dados-overlay'; div.className='ov';
+  div.innerHTML=`<div class="modal"><h3>${t('lblWhats')}</h3><p>${t('ask')}</p>
+    <input id="dc-whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="${t('ph')}">
+    <button class="btn btn-p" onclick="mbConfirmarDadosCheckout('${planoId}')">${t('goPay')}</button>
+    <button class="x" onclick="document.getElementById('dados-overlay').remove()">${t('cancel')}</button></div>`;
   document.body.appendChild(div);
-  setTimeout(()=>document.getElementById('dc-whatsapp')?.focus(),50);
+  setTimeout(()=>{const i=$('dc-whatsapp'); if(i) i.focus();},50);
 }
-
 function mbConfirmarDadosCheckout(planoId){
-  const whatsapp = document.getElementById('dc-whatsapp')?.value.trim();
-  const msgObrig = lang==='en' ? 'Please fill in your WhatsApp number.' : 'Preencha o WhatsApp.';
-  if (!whatsapp) { showToast(msgObrig); return; }
-  document.getElementById('dados-checkout-overlay')?.remove();
-  checkout(planoId, { whatsapp });
+  const whatsapp=($('dc-whatsapp')||{}).value; const w=(whatsapp||'').trim();
+  if(!w){ showToast(t('needWa')); return; }
+  const o=$('dados-overlay'); if(o) o.remove();
+  checkout(planoId,{whatsapp:w});
 }
 
-async function checkout(planoId, dadosCliente){
+async function checkout(planoId,dadosCliente){
   const plano=planoId===PL_ADAPT.id?PL_ADAPT:MOVH_CONFIG.planos.find(p=>p.id===planoId);
   if(!plano) return;
-  document.getElementById('loading-msg').textContent = lang==='en'?'Generating payment link…':'Gerando link de pagamento…';
-  document.getElementById('loading').classList.add('show');
-  const protoNome = lang==='en' ? (protocoloSelecionado?.nomeEn||protocoloSelecionado?.nome||'') : (protocoloSelecionado?.nome||'');
+  $('loading-msg').textContent=t('gen'); $('loading').classList.add('show');
   try{
     if(gwAtual==='mp'){
       const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout-asaas',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
+        method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          planoNome:plano.nome+(protoNome?' ('+protoNome+')':''),
-          precoBR:plano.precoBR, dias:plano.dias, planoId,
-          protocolo:protocoloSelecionado?.id||'',
-          external_reference:'LANDING|'+planoId+'|'+plano.dias+'|'+(protocoloSelecionado?.id||''),
-          successUrl:window.location.href+'?status=success',
-          cancelUrl:window.location.href+'?status=cancel',
-          nome:dadosCliente?.nome||'', email:dadosCliente?.email||'', whatsapp:dadosCliente?.whatsapp||'',
-        })
-      });
+          planoNome:plano.nome, precoBR:plano.precoBR, dias:plano.dias, planoId,
+          protocolo:'', external_reference:'LANDING|'+planoId+'|'+plano.dias+'|',
+          successUrl:window.location.href.split('?')[0]+'?status=success',
+          cancelUrl:window.location.href.split('?')[0]+'?status=cancel',
+          nome:'', email:'', whatsapp:dadosCliente?.whatsapp||''
+        })});
       const data=await res.json();
       if(!data.url) throw new Error(data.error||'Error');
-      document.getElementById('loading').classList.remove('show');
-      if (data.urlParcelado && data.urlAVista) {
-        mbAbrirEscolhaPagamento(data.urlAVista, data.urlParcelado, data.maxInstallments);
-      } else {
-        window.location.href=data.url;
-      }
+      $('loading').classList.remove('show');
+      if(data.urlParcelado&&data.urlAVista) mbAbrirEscolhaPagamento(data.urlAVista,data.urlParcelado,data.maxInstallments);
+      else window.location.href=data.url;
     } else {
       const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout',{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
+        method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({
-          planoNome:plano.nome+(protoNome?' ('+protoNome+')':''),
-          precoUK:plano.precoUK, dias:plano.dias, planoId,
-          protocolo:protocoloSelecionado?.id||'',
-          successUrl:window.location.href+'?status=success',
-          cancelUrl:window.location.href+'?status=cancel',
-          nome:dadosCliente?.nome||'', email:dadosCliente?.email||'', whatsapp:dadosCliente?.whatsapp||'',
-        })
-      });
+          planoNome:plano.nome, precoUK:plano.precoUK, dias:plano.dias, planoId, protocolo:'',
+          successUrl:window.location.href.split('?')[0]+'?status=success',
+          cancelUrl:window.location.href.split('?')[0]+'?status=cancel',
+          nome:'', email:'', whatsapp:dadosCliente?.whatsapp||''
+        })});
       const data=await res.json();
       if(!data.url) throw new Error(data.error||'Error');
       window.location.href=data.url;
     }
   }catch(err){
-    document.getElementById('loading').classList.remove('show');
-    showToast((lang==='en'?'Error: ':'Erro: ')+err.message);
+    $('loading').classList.remove('show');
+    showToast(t('err')+err.message);
   }
 }
 
-function mbAbrirEscolhaPagamento(urlAVista, urlParcelado, maxInstallments){
-  const old = document.getElementById('escolha-pagamento-overlay');
-  if (old) old.remove();
-  const titulo = lang==='en' ? 'Choose how to pay' : 'Escolha como pagar';
-  const txtAVista = lang==='en' ? 'Cash (Pix / Bank Slip)' : 'À vista (Pix / Boleto)';
-  const txtParcelado = lang==='en' ? `Credit Card (up to ${maxInstallments}x)` : `Cartão de Crédito (até ${maxInstallments}x)`;
-  const txtCancelar = lang==='en' ? 'Cancel' : 'Cancelar';
-  const div = document.createElement('div');
-  div.id = 'escolha-pagamento-overlay';
-  div.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:999;padding:16px';
-  div.innerHTML = `
-    <div style="background:#fff;border-radius:14px;padding:28px;max-width:380px;width:100%;text-align:center">
-      <h3 style="margin:0 0 18px;font-size:18px">${titulo}</h3>
-      <button onclick="window.location.href='${urlAVista}'" style="display:block;width:100%;padding:13px;margin-bottom:10px;border-radius:10px;border:1.5px solid #ddd;background:#fff;font-weight:700;font-size:14px;cursor:pointer">${txtAVista}</button>
-      <button onclick="window.location.href='${urlParcelado}'" style="display:block;width:100%;padding:13px;margin-bottom:14px;border-radius:10px;border:none;background:#111;color:#fff;font-weight:700;font-size:14px;cursor:pointer">${txtParcelado}</button>
-      <button onclick="document.getElementById('escolha-pagamento-overlay').remove()" style="background:none;border:none;color:#888;font-size:12px;cursor:pointer">${txtCancelar}</button>
-    </div>`;
-  document.body.appendChild(div);
-}
-
-function showToast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg; el.classList.add('show');
-  setTimeout(()=>el.classList.remove('show'),5000);
+function mbAbrirEscolhaPagamento(urlAVista,urlParcelado,maxInstallments){
+  const old=$('escolha-pagamento-overlay'); if(old) old.remove();
+  const div=document.createElement('div'); div.id='escolha-pagamento-overlay'; div.className='ov';
+  const a=document.createElement('div'); a.className='modal'; a.style.textAlign='center';
+  a.innerHTML=`<h3 style="margin-bottom:16px">${t('chooseTitle')}</h3>`;
+  const b1=document.createElement('button'); b1.className='btn btn-p'; b1.textContent=t('cash'); b1.onclick=()=>{window.location.href=urlAVista;};
+  const b2=document.createElement('button'); b2.className='btn btn-g'; b2.textContent=t('card')(maxInstallments); b2.onclick=()=>{window.location.href=urlParcelado;};
+  const b3=document.createElement('button'); b3.className='x'; b3.textContent=t('cancel'); b3.onclick=()=>div.remove();
+  a.append(b1,b2,b3); div.appendChild(a); document.body.appendChild(div);
 }
 
 (function checkStatus(){
-  const p=new URLSearchParams(window.location.search),s=p.get('status');
-  const msgs={
-    pt:{success:'✅ Pagamento confirmado! Você receberá o acesso em breve.',failure:'❌ Pagamento não aprovado. Tente novamente.',pending:'⏳ Pagamento pendente. Confirmaremos em breve.',cancel:'Pagamento cancelado.'},
-    en:{success:'✅ Payment confirmed! You will receive access shortly.',failure:'❌ Payment not approved. Please try again.',pending:'⏳ Payment pending. We will confirm shortly.',cancel:'Payment cancelled.'}
-  };
-  if(s) setTimeout(()=>showToast((msgs[lang]||msgs.pt)[s]||''),500);
+  const s=new URLSearchParams(window.location.search).get('status');
+  if(s) setTimeout(()=>showToast((TXT[lang].status||TXT.pt.status)[s]||''),500);
 })();
 
-// Init
+// barra fixa no celular: aparece depois do herói
+(function(){
+  const bar=$('bar'); const hero=$('topo');
+  function on(){ const r=hero.getBoundingClientRect(); bar.classList.toggle('show',r.bottom<40); }
+  window.addEventListener('scroll',on,{passive:true}); on();
+})();
+
+function detectarPais(){
+  fetch('https://ipapi.co/json/').then(r=>r.json()).then(d=>{
+    if(d.country_code&&d.country_code!=='BR'){ lang='en'; gwAtual='stripe'; modo='online'; render(); }
+  }).catch(()=>{});
+}
+
 async function plInitLanding(){
-  // Tenta buscar dados atualizados do Supabase (planos/protocolos/config).
-  // Se falhar por qualquer motivo (sem professorId, rede, tabela vazia),
-  // segue normalmente com os dados embutidos no HTML no momento da exportação.
-  if (MOVH_CONFIG.professorId) {
-    try {
-      const url = `${MOVH_CONFIG.supabaseUrl}/rest/v1/landing_config?professor_id=eq.${MOVH_CONFIG.professorId}&select=planos,protocolos,config`;
-      const res = await fetch(url, {
-        headers: {
-          'apikey': MOVH_CONFIG.supabaseKey,
-          'Authorization': `Bearer ${MOVH_CONFIG.supabaseKey}`
-        }
-      });
-      if (res.ok) {
-        const rows = await res.json();
-        const row = rows && rows[0];
-        if (row) {
-          if (Array.isArray(row.planos) && row.planos.length) MOVH_CONFIG.planos = row.planos;
-          if (Array.isArray(row.protocolos) && row.protocolos.length) MOVH_CONFIG.protocolos = row.protocolos;
-          const cfg = row.config;
-          if (cfg) {
-            if (cfg.netlifyUrl) MOVH_CONFIG.netlifyUrl = cfg.netlifyUrl;
-            const conv = s => (s||'').replace(/\|(.+?)\|/g,'<span>$1</span>');
-            const pt = MOVH_CONFIG.i18n.pt, en = MOVH_CONFIG.i18n.en;
-            if (cfg.badge)  pt.badge  = cfg.badge;
-            if (cfg.titulo) pt.titulo = conv(cfg.titulo);
-            if (cfg.sub)    pt.sub    = cfg.sub;
-            if (cfg.s1n) { pt.s1n = cfg.s1n; en.s1n = cfg.s1n; }
-            if (cfg.s2n) { pt.s2n = cfg.s2n; en.s2n = cfg.s2n; }
-            if (cfg.s3n) { pt.s3n = cfg.s3n; en.s3n = cfg.s3n; }
-            if (cfg.s1l) pt.s1l = cfg.s1l;
-            if (cfg.s2l) pt.s2l = cfg.s2l;
-            if (cfg.s3l) pt.s3l = cfg.s3l;
-            if (cfg.badgeEn)  en.badge  = cfg.badgeEn;
-            if (cfg.tituloEn) en.titulo = conv(cfg.tituloEn);
-            if (cfg.subEn)    en.sub    = cfg.subEn;
+  if(MOVH_CONFIG.professorId){
+    try{
+      const url=`${MOVH_CONFIG.supabaseUrl}/rest/v1/landing_config?professor_id=eq.${MOVH_CONFIG.professorId}&select=planos,config`;
+      const res=await fetch(url,{headers:{'apikey':MOVH_CONFIG.supabaseKey,'Authorization':`Bearer ${MOVH_CONFIG.supabaseKey}`}});
+      if(res.ok){
+        const rows=await res.json(); const row=rows&&rows[0];
+        if(row){
+          if(Array.isArray(row.planos)&&row.planos.length) MOVH_CONFIG.planos=row.planos;
+          const cfg=row.config;
+          if(cfg){
+            if(cfg.netlifyUrl) MOVH_CONFIG.netlifyUrl=cfg.netlifyUrl;
+            if(Array.isArray(cfg.presencial)&&cfg.presencial.length) MOVH_CONFIG.presencial=cfg.presencial;
+            if(cfg.pagamento) MOVH_CONFIG.pagamento=Object.assign({},MOVH_CONFIG.pagamento,cfg.pagamento);
+            const conv=s=>(s||'').replace(/\|(.+?)\|/g,'<span>$1</span>');
+            const hc=MOVH_CONFIG.heroCustom;
+            if(cfg.badge) hc.badge=cfg.badge; if(cfg.titulo) hc.titulo=conv(cfg.titulo); if(cfg.sub) hc.sub=cfg.sub;
+            if(cfg.badgeEn) hc.badgeEn=cfg.badgeEn; if(cfg.tituloEn) hc.tituloEn=conv(cfg.tituloEn); if(cfg.subEn) hc.subEn=cfg.subEn;
           }
         }
       }
-    } catch(e) {
-      // silencioso — fallback para os dados embutidos
-    }
+    }catch(e){ /* silencioso: segue com os dados embutidos */ }
   }
-  applyLang(); // aplica badge/titulo/sub/stats sincronizados (ou os embutidos, se não houve fetch)
+  render();
   detectarPais();
-  renderProtocolos();
-  renderSteps();
-  renderPlanos();
-  (function checkRenovar(){
-    const p=new URLSearchParams(window.location.search);
-    if(p.get('renovar')==='1'){
-      document.getElementById('screen-protocolos').classList.remove('active');
-      document.getElementById('screen-planos').classList.add('active');
-      const txtRenovacao = lang==='en' ? '🔄 Renew Access' : '🔄 Renovação de Acesso';
-      document.getElementById('planos-titulo').textContent = txtRenovacao;
-    }
-  })();
+  const p=new URLSearchParams(window.location.search);
+  if(p.get('renovar')==='1'){ $('pl-h2').textContent=t('renewTitle'); setTimeout(()=>irPara('planos'),300); }
 }
+render();
 plInitLanding();
 </script>
 </body>
