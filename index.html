@@ -45,6 +45,18 @@ nav{background:var(--card);border-bottom:1px solid var(--bd);padding:0 24px;heig
 .plano-card{background:var(--card);border:2px solid var(--bd);border-radius:var(--r);padding:28px 24px;text-align:center;transition:all .2s;position:relative}
 .plano-card:hover{border-color:var(--P);box-shadow:0 8px 24px rgba(124,116,220,.15)}
 .plano-card.popular{border-color:var(--P);transform:scale(1.04)}
+.planos-grid.auto{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));max-width:960px}
+.plano-card.entrada{border-color:var(--P)}
+.pres-tabs{display:flex;gap:8px;justify-content:center;margin:0 auto 20px}
+.pres-tab{padding:9px 18px;border-radius:99px;border:2px solid var(--P);background:var(--card);color:var(--P);font-weight:700;font-size:13px;cursor:pointer;font-family:inherit}
+.pres-tab.active{background:var(--P);color:#fff}
+.pres-sec{font-family:var(--font-d);font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);max-width:960px;margin:22px auto 12px}
+.pres-grid.one{max-width:480px}
+.pres-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:960px;margin:0 auto}
+.pres-nota{max-width:960px;margin:16px auto 0;background:var(--P);color:#fff;border-radius:var(--r);padding:14px 18px;font-size:13px;line-height:1.5}
+.pres-comb{max-width:960px;margin:16px auto 0;border:1.5px dashed var(--bd);border-radius:var(--r);padding:14px 18px;font-size:12px;color:var(--t2);line-height:1.7}
+.pres-cta{display:block;max-width:960px;margin:20px auto 0;background:var(--P);color:#fff;border-radius:var(--r);padding:18px;text-align:center;font-weight:800;font-size:18px;text-decoration:none}
+.pres-cta small{display:block;font-weight:500;font-size:12px;margin-top:4px;opacity:.9}
 .plano-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--P);color:#fff;border-radius:99px;padding:4px 14px;font-size:11px;font-weight:700;white-space:nowrap}
 .plano-nome{font-family:var(--font-d);font-size:15px;font-weight:700;margin-bottom:4px}
 .plano-dias{font-size:11px;color:var(--t3);margin-bottom:16px}
@@ -115,11 +127,24 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
     <div id="how-sub" class="section-sub">Do pagamento ao primeiro treino em minutos</div>
     <div class="steps" id="steps-grid"></div>
   </div>
+
+  <div class="section" id="section-presencial" style="display:none">
+    <div class="section-label">Personal presencial</div>
+    <div class="section-title">Seu treino, acompanhado de perto</div>
+    <div class="section-sub">Bodytech Moxuara · toda sessão começa com preparação (mobilidade ou aquecimento específico) e segue com treino de força</div>
+    <div class="pres-tabs">
+      <button class="pres-tab active" id="pt-ind" onclick="setPres('ind')">Individual</button>
+      <button class="pres-tab" id="pt-dup" onclick="setPres('dup')">Em dupla</button>
+    </div>
+    <div id="pres-body"></div>
+    <div class="pres-comb"><b>Combinados</b><br>• Adaptação paga por Pix antes da 1ª sessão.<br>• Horários combinados previamente.<br>• Na dupla, cada um paga a sua parte; se precisar mudar o horário ou passar para o individual, ajustamos a diferença.</div>
+    <a class="pres-cta" id="pres-cta" target="_blank" rel="noopener" href="#">COMEÇAR!<small>Chame no WhatsApp e agende sua adaptação.</small></a>
+  </div>
 </div>
 
 <!-- SCREEN 2: PLANOS -->
 <div class="screen" id="screen-planos">
-  <div class="section" style="padding-top:48px;max-width:860px">
+  <div class="section" style="padding-top:48px;max-width:1000px">
     <button id="back-btn" class="back-btn" onclick="voltarProtocolos()">← Voltar</button>
     <div id="pl-label" class="section-label">Planos</div>
     <div class="section-title" id="planos-titulo">Escolha seu plano</div>
@@ -128,7 +153,7 @@ footer{text-align:center;padding:32px 24px;font-size:12px;color:var(--t3);border
       <button class="gw-btn active" id="gw-mp" onclick="setGw('mp')">🇧🇷 Asaas (Pix / Cartão)</button>
       <button class="gw-btn" id="gw-stripe" onclick="setGw('stripe')">🌍 Cartão Internacional</button>
     </div>
-    <div class="planos-grid" id="planos-grid"></div>
+    <div class="planos-grid auto" id="planos-grid"></div>
   </div>
 </div>
 
@@ -142,7 +167,7 @@ const MOVH_CONFIG = {
   supabaseUrl: 'https://cfanjhuzrcgxrbfmhahi.supabase.co',
   supabaseKey: 'sb_publishable_UBIH2PU-7fkrH2gs40HW2w_Maj9dl2W',
   protocolos: [{"id":"hipertrofia","icon":"💪","nome":"Hipertrofia","desc":"Ganho de massa muscular com periodização inteligente e progressão de carga semana a semana.","tags":["Intermediário","3-5x/semana","Academia"],"nomeEn":"Hypertrophy","descEn":"Muscle gain with intelligent periodisation and progressive overload week by week.","tagsEn":["Intermediate","3-5x/week","Gym"]},{"id":"emagrecimento","icon":"🔥","nome":"Emagrecimento","desc":"Combinação de treino resistido e metabólico para perda de gordura com preservação muscular.","tags":["Iniciante","3-4x/semana","Academia / Casa"],"nomeEn":"Fat Loss","descEn":"Resistance and metabolic training combined for fat loss with muscle preservation.","tagsEn":["Beginner","3-4x/week","Gym / Home"]},{"id":"funcional","icon":"🦴","nome":"Mobilidade e RML","desc":"Treinos variados com foco em mobilidade, condicionamento e qualidade de movimento.","tags":["Todos os níveis","3-4x/semana","Casa / Academia"],"nomeEn":"LME and Mobility","descEn":"Varied training focused on mobility, conditioning and movement quality.","tagsEn":["All levels","3-4x/week","Home / Gym"]}],
-  planos:     [{"id":"pl1","nome":"1 Mês","dias":30,"precoBR":169,"precoUK":39},{"id":"pl2","nome":"3 Meses","dias":90,"precoBR":447,"precoUK":99},{"id":"pl3","nome":"6 Meses","dias":60,"precoBR":312,"precoUK":51}],
+  planos:     [{"id":"pl1","nome":"Mensal","dias":30,"precoBR":180,"precoUK":39,"tipo":"novo"},{"id":"pl6","nome":"Bimestral","dias":60,"precoBR":320,"precoUK":69,"tipo":"novo"},{"id":"pl2","nome":"Trimestral","dias":90,"precoBR":420,"precoUK":99,"tipo":"novo"}],
   i18n: {
     pt: {
       badge:    '🏋️ Treinamento Personalizado',
@@ -161,7 +186,7 @@ const MOVH_CONFIG = {
       ],
       plLabel:'Planos', plSub:'Quanto mais tempo, maior o resultado — e o desconto',
       gwBR:'🇧🇷 Asaas (Pix / Cartão)', gwInt:'🌍 Cartão Internacional',
-      popular:'⭐ Mais popular', access:'dias de acesso',
+      popular:'⭐ Mais popular', access:'dias de acesso', entry:'Comece por aqui', adNome:'Adaptação online', adDias:'4 semanas · tudo incluso', adSub:'Anamnese, avaliação postural, app e ajustes',
       startBtn:'Começar por', perMonth:'/mês', economy:'Economia de',
       back:'← Voltar', footer:'© 2025 MOVH · Treinamento Personalizado',
       langToggle:'🇬🇧 EN',
@@ -183,7 +208,7 @@ const MOVH_CONFIG = {
       ],
       plLabel:'Plans', plSub:'The longer the commitment, the bigger the result — and the saving',
       gwBR:'🇧🇷 Asaas (Pix / Card)', gwInt:'🌍 International Card',
-      popular:'⭐ Most popular', access:'days access',
+      popular:'⭐ Most popular', access:'days access', entry:'Start here', adNome:'Online adaptation', adDias:'4 weeks · all included', adSub:'Assessment, app and adjustments',
       startBtn:'Start from', perMonth:'/month', economy:'Save',
       back:'← Back', footer:'© 2025 MOVH · Personal Training',
       langToggle:'🇧🇷 PT',
@@ -311,11 +336,53 @@ function voltarProtocolos(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+const PL_ADAPT={id:'ol_ad',nome:'Adaptação online',dias:28,precoBR:120,precoUK:0};
+const PRES_WA='5527988225340';
+let presTipo='ind';
+const PRES={
+  ind:{ad:{p:220,s:55,sub:'Treino 100% focado em você.',lab:'Individual'},
+       pk:[{n:'Avulsa',p:80,s:80,sub:'uma sessão',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:576,s:72,sub:'pacote',nt:'10% de desconto.',pop:1},{n:'12 sessões',f:'3x na semana',p:816,s:68,sub:'pacote',nt:'15% de desconto.'}]},
+  dup:{ad:{p:180,s:45,sub:'Cada um paga a sua parte.',lab:'Em dupla · por pessoa'},
+       pk:[{n:'Avulsa',p:77,s:77,sub:'por pessoa',nt:'Para testar ou complementar.'},{n:'8 sessões',f:'2x na semana',p:528,s:66,sub:'por pessoa',nt:'Pacote de 8 sessões.',pop:1},{n:'12 sessões',f:'3x na semana',p:744,s:62,sub:'por pessoa',nt:'Melhor valor.'}]}
+};
+function setPres(k){presTipo=k;renderPresencial();}
+function renderPresencial(){
+  const sec=document.getElementById('section-presencial');
+  if(!sec) return;
+  sec.style.display=lang==='en'?'none':'';
+  const d=PRES[presTipo];
+  document.getElementById('pt-ind').classList.toggle('active',presTipo==='ind');
+  document.getElementById('pt-dup').classList.toggle('active',presTipo==='dup');
+  const card=(o,entrada)=>(o=o||{},`<div class="plano-card${o.pop||entrada?' popular':''}" style="${o.pop||entrada?'transform:none':''}">
+      ${o.pop?'<div class="plano-badge">Mais escolhido</div>':''}${entrada?'<div class="plano-badge">Comece por aqui</div>':''}
+      <div class="plano-nome">${entrada?'Adaptação · 4 sessões':o.n}</div>
+      <div class="plano-dias">${entrada?d.ad.lab:(o.f||'&nbsp;')}</div>
+      <div class="plano-preco"><sup>R$</sup>${entrada?d.ad.p:o.p}</div>
+      <div class="plano-economia" style="color:var(--t2)">${entrada?'4 sessões':o.sub}</div>
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px">R$ ${entrada?d.ad.s:o.s} por sessão</div>
+      <div style="font-size:11px;color:var(--t3)">${entrada?d.ad.sub:o.nt}</div>
+    </div>`);
+  document.getElementById('pres-body').innerHTML=
+    '<div class="pres-sec">Comece por aqui · fase de adaptação</div><div class="pres-grid one">'+card(null,true)+'</div>'+
+    '<div class="pres-nota"><b>Uma entrada que cabe no bolso.</b> Você começa sem pagar o pacote inteiro e a gente continua depois da adaptação.</div>'+
+    '<div class="pres-sec">Depois da adaptação · escolha seu pacote</div><div class="pres-grid">'+d.pk.map(o=>card(o,false)).join('')+'</div>';
+  const msg=presTipo==='ind'?'Oi! Quero começar a adaptação do personal presencial (individual).':'Oi! Quero começar a adaptação do personal presencial em dupla.';
+  document.getElementById('pres-cta').href='https://wa.me/'+PRES_WA+'?text='+encodeURIComponent(msg);
+}
+
 function renderPlanos(){
   const isBR=gwAtual==='mp';
-  const planos=MOVH_CONFIG.planos;
+  const planos=MOVH_CONFIG.planos.filter(p=>(p.tipo||'novo')==='novo');
   const base=planos[0];
-  document.getElementById('planos-grid').innerHTML=planos.map((p,i)=>{
+  const ad=isBR?`<div class="plano-card entrada">
+      <div class="plano-badge">${t('entry')}</div>
+      <div class="plano-nome">${t('adNome')}</div>
+      <div class="plano-dias">${t('adDias')}</div>
+      <div class="plano-preco"><sup>R$</sup>${PL_ADAPT.precoBR}</div>
+      <div class="plano-economia">${t('adSub')}</div>
+      <button class="plano-btn" onclick="mbAbrirDadosCheckout('${PL_ADAPT.id}')">${t('startBtn')} R$${PL_ADAPT.precoBR}</button>
+    </div>`:'';
+  document.getElementById('planos-grid').innerHTML=ad+planos.map((p,i)=>{
     const popular=i===1;
     const preco=isBR?p.precoBR:p.precoUK;
     const simbolo=isBR?'R$':'£';
@@ -333,6 +400,7 @@ function renderPlanos(){
       <button class="plano-btn" onclick="mbAbrirDadosCheckout('${p.id}')">${t('startBtn')} ${simbolo}${precoMensal}${t('perMonth')}</button>
     </div>`;
   }).join('');
+  renderPresencial();
 }
 
 function mbAbrirDadosCheckout(planoId){
@@ -371,7 +439,7 @@ function mbConfirmarDadosCheckout(planoId){
 }
 
 async function checkout(planoId, dadosCliente){
-  const plano=MOVH_CONFIG.planos.find(p=>p.id===planoId);
+  const plano=planoId===PL_ADAPT.id?PL_ADAPT:MOVH_CONFIG.planos.find(p=>p.id===planoId);
   if(!plano) return;
   document.getElementById('loading-msg').textContent = lang==='en'?'Generating payment link…':'Gerando link de pagamento…';
   document.getElementById('loading').classList.add('show');
