@@ -262,7 +262,6 @@ const MOVH_CONFIG = {
   heroCustom: {}
 };
 const PL_ADAPT={id:'ol_ad',nome:'Adaptação online',dias:28,precoBR:120,precoUK:0};
-const AV_MAPA={pres:150,online:130};
 const TXT={
  pt:{
   badge:'Treino com acompanhamento',
@@ -285,8 +284,8 @@ const TXT={
    et:['Base','Construção','Consolidação'],sem:['semanas 1 a 4','semanas 5 a 8','semanas 9 a 12'],tst:['teste na semana 4','teste na semana 8','reavaliação na 12'],
    ladh:'Cada movimento tem degraus',ladex:'Exemplo: agachar',lad:[['N1','Leg Press','Aprender'],['N2','Back Squat','Construir'],['N3','Bulgarian Split Squat','Desafiar'],['N4','Box Pistol','Avançado']],
    reg:'<b>Quando sobe?</b> Quando você bate a meta em 2 treinos seguidos, sem dor e com boa técnica. Se a técnica cair, volta um degrau.',
-   d1:['Degrau 1','Avaliação + Mapa','Vira crédito total se você fechar o programa em até 7 dias.'],d2:['Degrau 2','Programa de 12 semanas'],d3:['Degrau 3','Próximo ciclo','Continua de onde você parou, sem voltar ao começo.'],
-   pres:'presencial',onl:'online',tri:'Online: trimestral',pgp:'Presencial: 3 meses do pacote, com avaliação e reavaliação inclusas',m8:'8 sessões por mês',m12:'12 sessões por mês',talk:'Chamar no WhatsApp',waMsg:'Oi! Quero saber como funciona a Avaliação + Mapa e o programa de 12 semanas.'},
+   d1:['Degrau 1','Adaptação','4 semanas para começar sem pagar o pacote inteiro. Avaliação postural e protocolo no app.'],d2:['Degrau 2','Programa de 12 semanas'],d3:['Degrau 3','Próximo ciclo','Continua de onde você parou, sem voltar ao começo.'],
+   pres:'online',onl:'presencial',tri:'Online: trimestral',pgp:'Presencial: 3 meses do pacote, com avaliação e reavaliação inclusas',m8:'8 sessões por mês',m12:'12 sessões por mês',talk:'Chamar no WhatsApp',waMsg:'Oi! Quero saber como funciona a Avaliação + Mapa e o programa de 12 semanas.'},
   howLbl:'Como funciona', howH2:'Simples e direto',
   steps:[['Escolha','Comece pela adaptação online ou presencial, ou direto num plano.'],['Pague','Pix é o principal. Cartão parcelado nos planos acima de 1 mês.'],['Receba o acesso','Você recebe o link do app, responde a anamnese e eu monto seu treino.'],['Treine','Protocolo periodizado, vídeos, registro de cargas e ajustes pelo WhatsApp.']],
   inc:['Protocolo periodizado','App com vídeos','Registro de carga','Anamnese e PAR-Q','Ajustes pelo WhatsApp','Avaliação postural'],
@@ -397,11 +396,11 @@ function renderCaminho(){
   $('cm-reg').innerHTML=c.reg;
   const pl=(MOVH_CONFIG.presencial||[]), i8=pl.find(p=>p.id==='pr_i_8'), i12=pl.find(p=>p.id==='pr_i_12');
   const tri=(MOVH_CONFIG.planos||[]).find(p=>p.dias===90&&(!p.tipo||p.tipo==='novo'));
-  const wa=waLink(c.waMsg);
+  const adP=pl.find(p=>p.id==='pr_i_ad'), adD=pl.find(p=>p.id==='pr_d_ad');
   const prog=[tri?'<div class="price-s"><b>'+c.tri+' R$ '+fmt(tri.precoBR)+'</b></div>':'',
     (i8&&i12)?'<div class="price-s"><b>'+c.pgp+'</b><br>'+c.m8+': R$ '+fmt(i8.precoBR*3)+'<br>'+c.m12+': R$ '+fmt(i12.precoBR*3)+'</div>':''].join('');
   $('cm-deg').innerHTML=
-    '<div class="card"><h4><small>'+c.d1[0].toUpperCase()+'</small>'+c.d1[1]+'</h4><div class="price"><sup>R$</sup><big>'+AV_MAPA.pres+'</big></div><div class="price-s">'+c.pres+' · R$ '+AV_MAPA.online+' '+c.onl+'<br>'+c.d1[2]+'</div><a class="btn" style="display:block;text-align:center;text-decoration:none" href="'+wa+'" target="_blank" rel="noopener">'+c.talk+'</a></div>'+
+    '<div class="card"><h4><small>'+c.d1[0].toUpperCase()+'</small>'+c.d1[1]+'</h4><div class="price"><sup>R$</sup><big>'+PL_ADAPT.precoBR+'</big></div><div class="price-s">'+c.pres+' · R$ '+(adP?adP.precoBR:220)+' '+c.onl+(adD?' (dupla R$ '+adD.precoBR+' por pessoa)':'')+'<br>'+c.d1[2]+'</div><a class="btn" style="display:block;text-align:center;text-decoration:none" href="#planos">Ver adaptação</a></div>'+
     '<div class="card"><h4><small>'+c.d2[0].toUpperCase()+'</small>'+c.d2[1]+'</h4>'+prog+'</div>'+
     '<div class="card"><h4><small>'+c.d3[0].toUpperCase()+'</small>'+c.d3[1]+'</h4><div class="price-s">'+c.d3[2]+'</div></div>';
 }
