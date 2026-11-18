@@ -130,6 +130,14 @@ footer{text-align:center;padding:28px 20px 10px;font-size:12px;color:var(--mute)
 .toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(120px);background:#fff;color:#111;border-radius:14px;padding:12px 18px;font-size:13px;font-weight:600;z-index:400;transition:transform .3s;max-width:90vw}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .hide{display:none!important}
+#caminho .tl{display:flex;height:38px;border-radius:12px;overflow:hidden;margin:18px 0 6px}#caminho .tl div{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:1}
+#caminho .tl .a{background:#3b4a6e}#caminho .tl .b{background:#7a3a52}#caminho .tl .c{background:#b4303f}
+#caminho .tm{display:flex;font-size:11.5px;color:var(--mute);text-align:center}#caminho .tm div{flex:1}#caminho .tm .t{color:var(--ok);font-weight:700}
+#caminho .lad{display:flex;flex-direction:column;gap:8px;margin:12px 0}#caminho .deg{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px 12px}
+#caminho .deg em{font-style:normal;font-size:11px;font-weight:800;color:#fff;border-radius:8px;padding:5px 7px;min-width:34px;text-align:center;background:#3b4a6e}#caminho .deg:nth-child(2) em{background:#7a3a52}#caminho .deg:nth-child(3) em{background:#b4303f}#caminho .deg:nth-child(4) em{background:var(--P)}
+#caminho .deg b{font-size:14px}#caminho .deg span{font-size:12px;color:var(--mute);margin-left:auto}
+#caminho .reg{background:var(--card);border-left:3px solid var(--ok);border-radius:10px;padding:11px 13px;font-size:13.5px;color:var(--soft);line-height:1.5;margin:6px 0 4px}
+#caminho .grid{margin-top:18px}#caminho .card .price-s{font-size:13px;color:var(--soft);line-height:1.5;margin:6px 0 10px}#caminho .card h4 small{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--P2);margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -186,6 +194,19 @@ footer{text-align:center;padding:28px 20px 10px;font-size:12px;color:var(--mute)
   </div>
 </div></section>
 
+<section id="caminho"><div class="wrap">
+  <div class="lbl" id="cm-lbl"></div>
+  <h2 id="cm-h2"></h2>
+  <p class="lead" id="cm-lead"></p>
+  <div class="tl"><div class="a" id="cm-b1"></div><div class="b" id="cm-b2"></div><div class="c" id="cm-b3"></div></div>
+  <div class="tm"><div id="cm-w1"></div><div id="cm-w2"></div><div id="cm-w3"></div></div>
+  <div class="tm" style="margin-top:3px"><div class="t" id="cm-t1"></div><div class="t" id="cm-t2"></div><div class="t" id="cm-t3"></div></div>
+  <div class="sec-h"><span id="cm-ladh"></span><span id="cm-ladex"></span></div>
+  <div class="lad" id="cm-lad"></div>
+  <div class="reg" id="cm-reg"></div>
+  <div class="grid" id="cm-deg"></div>
+</div></section>
+
 <section><div class="wrap">
   <div class="lbl" id="how-lbl">Como funciona</div>
   <h2 id="how-h2">Simples e direto</h2>
@@ -222,10 +243,10 @@ const MOVH_CONFIG = {
   supabaseKey: 'sb_publishable_UBIH2PU-7fkrH2gs40HW2w_Maj9dl2W',
   planos: [
     {id:'pl1',nome:'Mensal',dias:30,precoBR:180,precoUK:39,tipo:'novo'},
-    {id:'pl6',nome:'Bimestral',dias:60,precoBR:320,precoUK:69,tipo:'novo'},
+    {id:'pl6',nome:'Bimestral',dias:60,precoBR:290,precoUK:69,tipo:'novo'},
     {id:'pl2',nome:'Trimestral',dias:90,precoBR:420,precoUK:99,tipo:'novo'},
     {id:'pl4',nome:'Renovação',dias:30,precoBR:150,precoUK:0,tipo:'renovacao'},
-    {id:'pl5',nome:'Reativação',dias:30,precoBR:165,precoUK:0,tipo:'reativacao'}
+    {id:'pl5',nome:'Reativação',dias:30,precoBR:90,precoUK:0,tipo:'reativacao'}
   ],
   presencial: [
     {id:'pr_i_ad',grupo:'Presencial individual',nome:'Adaptação (4 sessões)',dias:30,precoBR:220,sessoes:4},
@@ -241,6 +262,7 @@ const MOVH_CONFIG = {
   heroCustom: {}
 };
 const PL_ADAPT={id:'ol_ad',nome:'Adaptação online',dias:28,precoBR:120,precoUK:0};
+const AV_MAPA={pres:150,online:130};
 const TXT={
  pt:{
   badge:'Treino com acompanhamento',
@@ -255,10 +277,16 @@ const TXT={
   start:'Começar agora', after:'Depois da adaptação', choosePlan:'Escolha seu plano', choosePack:'Escolha seu pacote',
   popular:'Mais escolhido', perMonth:'por mês', per:n=>'por '+n+' meses', permo:v=>'R$ '+v+' por mês', save:v=>'Economia de R$ '+v,
   noLock:'Sem fidelidade, mês a mês.', onlyPix:'Pagamento por Pix', pixCard:n=>'Pix ou cartão (até '+n+'x)',
-  renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative com treino novo por R$ '+v+'.',
+  renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative por R$ '+v+' e retome o seu treino atual.',
   paynote:'Pix é a forma principal de pagamento. Cartão (parcelado) apenas nos planos acima de 1 mês.',
   prAd:'Adaptação · 4 sessões', prAdSub:'4 sessões', perSess:v=>'R$ '+v+' por sessão', perPerson:'por pessoa', oneSess:'uma sessão', pack:'pacote',
   prAvTip:'Para testar ou complementar.', wk2:'2x na semana', wk3:'3x na semana', soon:'Chamar no WhatsApp',
+  cm:{lbl:'Seu caminho',h2:'Você sabe onde está e quanto falta',lead:'Todo aluno segue o mesmo caminho: começa por uma avaliação, treina 12 semanas em três etapas e reavalia no fim.',
+   et:['Base','Construção','Consolidação'],sem:['semanas 1 a 4','semanas 5 a 8','semanas 9 a 12'],tst:['teste na semana 4','teste na semana 8','reavaliação na 12'],
+   ladh:'Cada movimento tem degraus',ladex:'Exemplo: agachar',lad:[['N1','Leg Press','Aprender'],['N2','Back Squat','Construir'],['N3','Bulgarian Split Squat','Desafiar'],['N4','Box Pistol','Avançado']],
+   reg:'<b>Quando sobe?</b> Quando você bate a meta em 2 treinos seguidos, sem dor e com boa técnica. Se a técnica cair, volta um degrau.',
+   d1:['Degrau 1','Avaliação + Mapa','Vira crédito total se você fechar o programa em até 7 dias.'],d2:['Degrau 2','Programa de 12 semanas'],d3:['Degrau 3','Próximo ciclo','Continua de onde você parou, sem voltar ao começo.'],
+   pres:'presencial',onl:'online',tri:'Online: trimestral',pgp:'Presencial: 3 meses do pacote, com avaliação e reavaliação inclusas',m8:'8 sessões por mês',m12:'12 sessões por mês',talk:'Chamar no WhatsApp',waMsg:'Oi! Quero saber como funciona a Avaliação + Mapa e o programa de 12 semanas.'},
   howLbl:'Como funciona', howH2:'Simples e direto',
   steps:[['Escolha','Comece pela adaptação online ou presencial, ou direto num plano.'],['Pague','Pix é o principal. Cartão parcelado nos planos acima de 1 mês.'],['Receba o acesso','Você recebe o link do app, responde a anamnese e eu monto seu treino.'],['Treine','Protocolo periodizado, vídeos, registro de cargas e ajustes pelo WhatsApp.']],
   inc:['Protocolo periodizado','App com vídeos','Registro de carga','Anamnese e PAR-Q','Ajustes pelo WhatsApp','Avaliação postural'],
@@ -354,7 +382,28 @@ function render(){
   $('bar-t').innerHTML=t('barT')(isBR?PL_ADAPT.precoBR:(first?first.precoUK:''));
   $('bar-btn').textContent=t('barBtn');
   const wl=waLink(t('waMsg')); $('wa-top').href=wl; $('wa-bar').href=wl; $('wa-top').textContent='💬 '+t('wa');
-  renderOnline(); renderPres();
+  renderOnline(); renderPres(); renderCaminho();
+}
+
+function renderCaminho(){
+  const sec=$('caminho'); if(!sec) return;
+  if(lang==='en'||gwAtual!=='mp'){ sec.classList.add('hide'); return; }
+  sec.classList.remove('hide');
+  const c=TXT.pt.cm, fmt=v=>String(v).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+  $('cm-lbl').textContent=c.lbl; $('cm-h2').textContent=c.h2; $('cm-lead').textContent=c.lead;
+  [1,2,3].forEach(i=>{$('cm-b'+i).textContent=c.et[i-1];$('cm-w'+i).textContent=c.sem[i-1];$('cm-t'+i).textContent=c.tst[i-1];});
+  $('cm-ladh').textContent=c.ladh; $('cm-ladex').textContent=c.ladex;
+  $('cm-lad').innerHTML=c.lad.map(x=>'<div class="deg"><em>'+x[0]+'</em><b>'+x[1]+'</b><span>'+x[2]+'</span></div>').join('');
+  $('cm-reg').innerHTML=c.reg;
+  const pl=(MOVH_CONFIG.presencial||[]), i8=pl.find(p=>p.id==='pr_i_8'), i12=pl.find(p=>p.id==='pr_i_12');
+  const tri=(MOVH_CONFIG.planos||[]).find(p=>p.dias===90&&(!p.tipo||p.tipo==='novo'));
+  const wa=waLink(c.waMsg);
+  const prog=[tri?'<div class="price-s"><b>'+c.tri+' R$ '+fmt(tri.precoBR)+'</b></div>':'',
+    (i8&&i12)?'<div class="price-s"><b>'+c.pgp+'</b><br>'+c.m8+': R$ '+fmt(i8.precoBR*3)+'<br>'+c.m12+': R$ '+fmt(i12.precoBR*3)+'</div>':''].join('');
+  $('cm-deg').innerHTML=
+    '<div class="card"><h4><small>'+c.d1[0].toUpperCase()+'</small>'+c.d1[1]+'</h4><div class="price"><sup>R$</sup><big>'+AV_MAPA.pres+'</big></div><div class="price-s">'+c.pres+' · R$ '+AV_MAPA.online+' '+c.onl+'<br>'+c.d1[2]+'</div><a class="btn" style="display:block;text-align:center;text-decoration:none" href="'+wa+'" target="_blank" rel="noopener">'+c.talk+'</a></div>'+
+    '<div class="card"><h4><small>'+c.d2[0].toUpperCase()+'</small>'+c.d2[1]+'</h4>'+prog+'</div>'+
+    '<div class="card"><h4><small>'+c.d3[0].toUpperCase()+'</small>'+c.d3[1]+'</h4><div class="price-s">'+c.d3[2]+'</div></div>';
 }
 
 function metodoTxt(p){
