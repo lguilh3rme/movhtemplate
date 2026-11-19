@@ -256,16 +256,16 @@ const TXT={
   titulo:'Seu treino, com <span>acompanhamento</span> de verdade.',
   sub:'Protocolo periodizado, <b>app com vídeos</b> e ajustes direto pelo <b>WhatsApp</b>. Online ou presencial.',
   cta1:p=>'Começar por R$'+p, cta2:'Ver planos',
-  trust:['Pix ou cartão','Sem fidelidade','App com vídeos','Ajustes pelo WhatsApp'],
+  trust:['Pix','Sem fidelidade','App com vídeos','Ajustes pelo WhatsApp'],
   plLbl:'Escolha como treinar', plH2:'Comece pela adaptação', plLead:'Uma entrada que cabe no bolso: você começa sem pagar o pacote inteiro e só continua se gostar.',
   online:'Online', pres:'Presencial', ind:'Individual', dup:'Em dupla',
   here:'Comece por aqui', newOnly:'Para quem é novo', adTitle:'Adaptação online', adSub:'4 semanas · tudo incluso',
   adTicks:['Anamnese e PAR-Q','Avaliação postural','Protocolo periodizado no app','Ajustes pelo WhatsApp'],
   start:'Começar agora', after:'Depois da adaptação', choosePlan:'Escolha seu plano', choosePack:'Escolha seu pacote',
   popular:'Mais escolhido', perMonth:'por mês', per:n=>'por '+n+' meses', permo:v=>'R$ '+v+' por mês', save:v=>'Economia de R$ '+v,
-  noLock:'Sem fidelidade, mês a mês.', onlyPix:'Pagamento por Pix', pixCard:n=>'Pix ou cartão (até '+n+'x)',
+  noLock:'Sem fidelidade, mês a mês.', onlyPix:'Pagamento por Pix', pixCard:n=>'Pix (até '+n+'x)',
   renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative por R$ '+v+' e retome o seu treino atual.',
-  paynote:'Pix é a forma principal de pagamento. Cartão (parcelado) apenas nos planos acima de 1 mês.',
+  paynote:'Pix é a forma de pagamento. Quer parcelar? Fale no WhatsApp.',
   prAd:'Adaptação · 4 sessões', prAdSub:'4 sessões', perSess:v=>'R$ '+v+' por sessão', perPerson:'por pessoa', oneSess:'uma sessão', pack:'pacote',
   prAvTip:'Para testar ou complementar.', wk2:'2x na semana', wk3:'3x na semana', soon:'Chamar no WhatsApp',
   cm:{lbl:'Seu caminho',h2:'Você sabe onde está e quanto falta',lead:'Todo aluno segue o mesmo caminho: começa por uma avaliação, treina 12 semanas em três etapas e reavalia no fim.',
@@ -391,7 +391,7 @@ function renderCaminho(){
 function metodoTxt(p){
   const min=+((MOVH_CONFIG.pagamento||{}).cartaoMinDias||31);
   if(lang==='en') return '';
-  return p.dias>=min?t('pixCard')(maxParcelas(p.dias)):t('onlyPix');
+  return t('onlyPix');
 }
 
 function renderOnline(){
@@ -488,20 +488,9 @@ async function checkout(planoId,dadosCliente){
   $('loading-msg').textContent=t('gen'); $('loading').classList.add('show');
   try{
     if(gwAtual==='mp'){
-      const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout-asaas',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          planoNome:plano.nome, precoBR:plano.precoBR, dias:plano.dias, planoId,
-          protocolo:'', external_reference:'LANDING|'+planoId+'|'+plano.dias+'|',
-          successUrl:window.location.href.split('?')[0]+'?status=success',
-          cancelUrl:window.location.href.split('?')[0]+'?status=cancel',
-          nome:'', email:'', whatsapp:dadosCliente?.whatsapp||''
-        })});
-      const data=await res.json();
-      if(!data.url) throw new Error(data.error||'Error');
       $('loading').classList.remove('show');
-      if(data.urlParcelado&&data.urlAVista) mbAbrirEscolhaPagamento(data.urlAVista,data.urlParcelado,data.maxInstallments);
-      else window.location.href=data.url;
+      mbAbrirPix(plano,dadosCliente);
+      return;
     } else {
       const res=await fetch('https://cfanjhuzrcgxrbfmhahi.supabase.co/functions/v1/create-checkout',{
         method:'POST',headers:{'Content-Type':'application/json'},
@@ -521,6 +510,25 @@ async function checkout(planoId,dadosCliente){
   }
 }
 
+
+// Pix próprio (chaves vêm de landing_config.config.pix): copia a chave e avisa no WhatsApp com o comprovante
+function mbAbrirPix(plano,dc){
+  const old=$('pix-overlay'); if(old) old.remove();
+  const cfg=MOVH_CONFIG.pix||{}; const itens=(cfg.ativo!==false&&Array.isArray(cfg.itens)?cfg.itens:[]).filter(i=>i&&i.chave);
+  const valor='R$ '+Number(plano.precoBR).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  const msg=`Olá! Quero o plano ${plano.nome} (${valor}). Vou pagar por Pix e envio o comprovante.`+(dc&&dc.whatsapp?` Meu WhatsApp: ${dc.whatsapp}`:'');
+  const wa='https://wa.me/'+waNum()+'?text='+encodeURIComponent(msg);
+  const div=document.createElement('div'); div.id='pix-overlay'; div.className='ov';
+  const m=document.createElement('div'); m.className='modal'; m.style.textAlign='center';
+  const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  m.innerHTML=`<h3 style="margin-bottom:4px">Pagar por Pix</h3><div style="color:var(--mut,#9aa4b5);margin-bottom:12px">${esc(plano.nome)} · <b>${valor}</b></div>`+
+    (itens.length?itens.map((i,k)=>`<div style="background:rgba(255,255,255,.05);border-radius:10px;padding:10px;margin-bottom:8px;text-align:left"><div style="font-size:12px;opacity:.7">${esc(i.banco||'Pix')}</div><div style="word-break:break-all;font-weight:700">${esc(i.chave)}</div><button class="btn btn-g" style="margin-top:8px;width:100%" data-k="${k}">Copiar chave</button></div>`).join(''):'<div style="margin-bottom:12px">Fale com a gente no WhatsApp para receber a chave Pix.</div>')+
+    `<a class="btn btn-p" style="width:100%;display:block;margin-top:6px" target="_blank" rel="noopener" href="${wa}">Já paguei · enviar comprovante</a>`+
+    `<div style="font-size:12px;opacity:.7;margin-top:10px">Quer parcelar? Chame no WhatsApp que a gente combina.</div><button class="x" style="margin-top:8px">Fechar</button>`;
+  m.querySelectorAll('button[data-k]').forEach(b=>b.onclick=()=>{const c=itens[+b.dataset.k].chave; (navigator.clipboard?navigator.clipboard.writeText(c):Promise.reject()).then(()=>{b.textContent='✓ Copiado';},()=>{b.textContent=c;});});
+  m.querySelector('.x').onclick=()=>div.remove();
+  div.appendChild(m); document.body.appendChild(div);
+}
 function mbAbrirEscolhaPagamento(urlAVista,urlParcelado,maxInstallments){
   const old=$('escolha-pagamento-overlay'); if(old) old.remove();
   const div=document.createElement('div'); div.id='escolha-pagamento-overlay'; div.className='ov';
@@ -565,6 +573,7 @@ async function plInitLanding(){
             if(cfg.logo_topo&&(cfg.logo_topo.e||cfg.logo_topo.c)){ const lt=document.querySelector('.lg-top'); if(lt) lt.src=cfg.logo_topo.e||cfg.logo_topo.c; }
             if(Array.isArray(cfg.presencial)&&cfg.presencial.length) MOVH_CONFIG.presencial=cfg.presencial;
             if(cfg.pagamento) MOVH_CONFIG.pagamento=Object.assign({},MOVH_CONFIG.pagamento,cfg.pagamento);
+            if(cfg.pix) MOVH_CONFIG.pix=cfg.pix;
             const conv=s=>(s||'').replace(/\|(.+?)\|/g,'<span>$1</span>');
             const hc=MOVH_CONFIG.heroCustom;
             if(cfg.badge) hc.badge=cfg.badge; if(cfg.titulo) hc.titulo=conv(cfg.titulo); if(cfg.sub) hc.sub=cfg.sub;
