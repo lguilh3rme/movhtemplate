@@ -234,7 +234,8 @@ const MOVH_CONFIG = {
     {id:'pl6',nome:'Bimestral',dias:60,precoBR:290,precoUK:69,tipo:'novo'},
     {id:'pl2',nome:'Trimestral',dias:90,precoBR:420,precoUK:99,tipo:'novo'},
     {id:'pl4',nome:'Renovação',dias:30,precoBR:150,precoUK:0,tipo:'renovacao'},
-    {id:'pl5',nome:'Reativação',dias:30,precoBR:90,precoUK:0,tipo:'reativacao'}
+    {id:'pl5',nome:'Reativação',dias:30,precoBR:90,precoUK:0,tipo:'reativacao'},
+{id:'pl7',nome:'Protocolo',dias:30,precoBR:90,precoUK:0,tipo:'protocolo'}
   ],
   presencial: [
     {id:'pr_i_ad',grupo:'Presencial individual',nome:'Adaptação (4 sessões)',dias:30,precoBR:220,sessoes:4},
@@ -264,7 +265,7 @@ const TXT={
   start:'Começar agora', after:'Depois da adaptação', choosePlan:'Escolha seu plano', choosePack:'Escolha seu pacote',
   popular:'Mais escolhido', perMonth:'por mês', per:n=>'por '+n+' meses', permo:v=>'R$ '+v+' por mês', save:v=>'Economia de R$ '+v,
   noLock:'Sem fidelidade, mês a mês.', onlyPix:'Pagamento por Pix', pixCard:n=>'Pix (até '+n+'x)',
-  renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative por R$ '+v+' e retome o seu treino atual.',
+  renew:v=>'<b>Já é aluno?</b> Renove o mensal por R$ '+v+', sem refazer a anamnese.', react:v=>'<b>Ficou parado?</b> Reative por R$ '+v+' e retome o seu treino atual.', proto:v=>'<b>Só quer o treino pronto?</b> Protocolo em loop, sem avaliação nem Mapa: R$ '+v+' por mês.',
   paynote:'Pix é a forma de pagamento. Quer parcelar? Fale no WhatsApp.',
   prAd:'Adaptação · 4 sessões', prAdSub:'4 sessões', perSess:v=>'R$ '+v+' por sessão', perPerson:'por pessoa', oneSess:'uma sessão', pack:'pacote',
   prAvTip:'Para testar ou complementar.', wk2:'2x na semana', wk3:'3x na semana', soon:'Chamar no WhatsApp',
@@ -304,7 +305,7 @@ const TXT={
   start:'Start now', after:'Plans', choosePlan:'Choose your plan', choosePack:'',
   popular:'Most popular', perMonth:'per month', per:n=>'for '+n+' months', permo:v=>'£'+v+' per month', save:v=>'Save £'+v,
   noLock:'No lock-in, month to month.', onlyPix:'', pixCard:n=>'Card',
-  renew:v=>'', react:v=>'',
+  renew:v=>'', react:v=>'', proto:v=>'',
   paynote:'Secure card checkout.',
   prAd:'', prAdSub:'', perSess:v=>'', perPerson:'', oneSess:'', pack:'', prAvTip:'', wk2:'', wk3:'', soon:'',
   howLbl:'How it works', howH2:'Simple and direct',
@@ -422,8 +423,8 @@ function renderOnline(){
       <div class="how">${isBR?metodoTxt(p):''}</div>
       <button class="btn" onclick="mbAbrirDadosCheckout('${p.id}')">${t('start')}</button></div>`;
   }).join('');
-  const ren=porTipo('renovacao'), rea=porTipo('reativacao');
-  $('on-extra').innerHTML=isBR?((ren?'<div>'+t('renew')(ren.precoBR)+'</div>':'')+(rea?'<div>'+t('react')(rea.precoBR)+'</div>':'')):'';
+  const ren=porTipo('renovacao'), rea=porTipo('reativacao'), pro=porTipo('protocolo');
+  $('on-extra').innerHTML=isBR?((pro?'<div>'+t('proto')(pro.precoBR)+'</div>':'')+(ren?'<div>'+t('renew')(ren.precoBR)+'</div>':'')+(rea?'<div>'+t('react')(rea.precoBR)+'</div>':'')):'';
   $('paynote').textContent=t('paynote');
 }
 
